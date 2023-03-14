@@ -10,6 +10,7 @@ public enum EHitState
     Lagdoll
 }
 
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Entity : MonoBehaviour
 {
@@ -31,18 +32,21 @@ public abstract class Entity : MonoBehaviour
     public EHitState hitState;
     public float stunValue;
     public float maxStunValue;
-    public float hp;
+    [SerializeField]
+    protected float hp;
     protected Rigidbody2D rb;
+    protected BoxCollider2D col;
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
     }
     protected abstract void Die();
     protected abstract void Hit(float value);
     protected bool isOnAir()
     {
         int layerMask = 1 << LayerMask.NameToLayer("Platform");
-        var ray = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, layerMask);
+        var ray = Physics2D.Raycast(transform.position, Vector2.down, col.size.y / 2, layerMask);
         if (ray.collider == null) return true;
         else return false;
     }

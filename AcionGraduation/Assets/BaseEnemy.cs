@@ -4,10 +4,31 @@ using UnityEngine;
 
 public class BaseEnemy : Entity
 {
+    protected float stunTime;
     protected virtual void Update()
     {
-        isOnAir();
+        StandUp();
+        if (hitState == EHitState.Stun)
+        {
+            stunTime += Time.deltaTime;
+            if (stunTime > 1)
+            {
+                stunTime = 0;
+                hitState = EHitState.Normal;
+            }
+        }
     }
+
+    protected virtual void StandUp()
+    {
+        if (hitState == EHitState.Lagdoll && !isOnAir())
+        {
+            hitState = EHitState.Normal;
+            rb.gravityScale = 1;
+            rb.mass = 2f;
+        }
+    }
+
     protected override void Die()
     {
         Destroy(gameObject);
@@ -22,23 +43,18 @@ public class BaseEnemy : Entity
                 {
                     stunValue = 0;
                     hitState = EHitState.Stun;
+                    rb.mass = 1f;
                 }
                 break;
             case EHitState.Stun:
                 if (isOnAir())
                 {
                     hitState = EHitState.Lagdoll;
-                    rb.gravityScale = 0.1f;
-                    rb.mass = 1f;
+                    rb.gravityScale = 0.5f;
                 }
                 break;
             case EHitState.Lagdoll:
-                if (!isOnAir())
-                {
-                    hitState = EHitState.Normal;
-                    rb.gravityScale = 1;
-                    rb.mass = 10f;
-                }
+                stunTime = 0;
                 break;
         }
     }

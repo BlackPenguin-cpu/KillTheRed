@@ -10,6 +10,7 @@ public class Player : Entity
     public bool onAir;
     public float upperPower;
 
+    private int lookRight;
     [SerializeField]
     private float jumpPower;
     [SerializeField]
@@ -45,34 +46,35 @@ public class Player : Entity
     private void Move()
     {
         var hor = Input.GetAxisRaw("Horizontal");
+        if (hor != 0) lookRight = (int)hor;
         var spdValue = hor * spd * Time.deltaTime;
 
         transform.position += Vector3.right * spdValue;
     }
     private void BaseAttack()
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Enemy");
-        var ray = Physics2D.BoxCastAll(transform.position + (Vector3)upperCutArea.offset, upperCutArea.size, 0, Vector2.right, 0, layerMask);
-
+        var ray = AttackCollisionCheck(baseAttackArea);
         foreach (RaycastHit2D physics2D in ray)
         {
-            physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(2.8f, 1f);
+            physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 1f);
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= 1;
         }
 
-        if (onAir)
-        {
-            rb.velocity = new Vector2(2.5f, 1);
-        }
+        //if (onAir) rb.velocity = new Vector2(2.5f, 1);
     }
     private void UpperCut()
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Enemy");
-        var ray = Physics2D.BoxCastAll(transform.position + (Vector3)upperCutArea.offset, upperCutArea.size, 0, Vector2.right, 0, layerMask);
+        var ray = AttackCollisionCheck(upperCutArea);
         foreach (RaycastHit2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
         }
         rb.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
+    }
+    private RaycastHit2D[] AttackCollisionCheck(BoxCollider2D collider2D)
+    {
+        int layerMask = 1 << LayerMask.NameToLayer("Enemy");
+        return Physics2D.BoxCastAll(transform.position + (Vector3)collider2D.offset, collider2D.size, 0, lookRight == 1 ? Vector2.right : Vector2.left, 0, layerMask);
     }
 
     protected override void Die()
