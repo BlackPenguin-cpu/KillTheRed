@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     public BoxCollider2D upperCutArea;
     public BoxCollider2D baseAttackArea;
@@ -15,25 +15,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float spd;
 
-    private Rigidbody2D rb;
-    // Start is called before the first frame update
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
     // Update is called once per frame
     private void Update()
     {
         PlayerInput();
         Move();
-        CheckOnAir();
-    }
-    private void CheckOnAir()
-    {
-        int layerMask = 1 << LayerMask.NameToLayer("Platform");
-        var ray = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, layerMask);
-        if (ray.collider == null) onAir = true;
-        else onAir = false;
+        onAir = isOnAir();
     }
     private void PlayerInput()
     {
@@ -86,5 +73,15 @@ public class Player : MonoBehaviour
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
         }
         rb.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
+    }
+
+    protected override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void Hit(float value)
+    {
+        throw new System.NotImplementedException();
     }
 }
