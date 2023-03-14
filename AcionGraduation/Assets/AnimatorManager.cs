@@ -7,7 +7,11 @@ public class AnimatorManager : MonoBehaviour
 {
     public class AnimationClip
     {
-        public ;
+        public List<Sprite> sprites;
+
+        public bool loop;
+        public float speed;
+
     }
 
 }
