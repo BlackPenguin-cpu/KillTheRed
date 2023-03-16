@@ -1,9 +1,9 @@
 using UnityEngine;
 
-enum EPlayerState
+public enum EPlayerState
 {
     Idle,
-    Walk,
+    Run,
     Jump,
     Attack,
     Dead,
@@ -13,6 +13,19 @@ public class Player : Entity
 {
     public BoxCollider2D upperCutArea;
     public BoxCollider2D baseAttackArea;
+    private EPlayerState state;
+    public EPlayerState StateProfull
+    {
+        get { return state; }
+        set
+        {
+            if (state != value)
+            {
+                animatorManager.AnimationPlay(value.ToString());
+            }
+            state = value;
+        }
+    }
 
     public bool onAir;
     public float upperForcePower;
@@ -25,7 +38,16 @@ public class Player : Entity
     [SerializeField]
     private float spd;
 
-    // Update is called once per frame
+    private SpriteRenderer spriteRenderer;
+    private AnimatorManager animatorManager;
+
+    protected override void Start()
+    {
+        base.Start();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animatorManager = GetComponent<AnimatorManager>();
+        animatorManager.AnimationPlay("Idle");
+    }
     private void Update()
     {
         PlayerInput();
@@ -55,7 +77,16 @@ public class Player : Entity
     private void Move()
     {
         var hor = Input.GetAxisRaw("Horizontal");
-        if (hor != 0) lookDir = (int)hor;
+        if (hor != 0)
+        {
+            lookDir = (int)hor;
+            spriteRenderer.flipX = lookDir == 1 ? false : true;
+            StateProfull = EPlayerState.Run;
+        }
+        else
+        {
+            StateProfull = EPlayerState.Idle;
+        }
         var spdValue = hor * spd * Time.deltaTime;
 
         transform.position += Vector3.right * spdValue;
