@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,14 +13,14 @@ public enum EHitState
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : SerializedMonoBehaviour
 {
     public virtual float Hp
     {
         get { return hp; }
         set
         {
-            value = Mathf.Max(0, value);
+            value = Mathf.Clamp(value, 0, maxHp);
             hp = value;
             if (value - hp <= 0) Hit(hp - value);
             if (hitState != EHitState.Lagdoll && value == 0)
@@ -32,6 +33,8 @@ public abstract class Entity : MonoBehaviour
     public EHitState hitState;
     public float stunValue;
     public float maxStunValue;
+    [SerializeField]
+    protected float maxHp;
     [SerializeField]
     protected float hp;
     protected Rigidbody2D rb;
@@ -46,7 +49,7 @@ public abstract class Entity : MonoBehaviour
     protected bool isOnAir()
     {
         int layerMask = 1 << LayerMask.NameToLayer("Platform");
-        var ray = Physics2D.Raycast(transform.position, Vector2.down, col.size.y / 2, layerMask);
+        var ray = Physics2D.BoxCast((Vector2)transform.position + col.offset, col.size, 0, Vector2.down, 0.01f, layerMask);
         if (ray.collider == null) return true;
         else return false;
     }

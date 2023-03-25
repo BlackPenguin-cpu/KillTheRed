@@ -1,5 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
+public enum EPlayerWeaponState
+{
+    Hand,
+    Sword,
+    Pistol,
+    Hammer
+}
 public enum EPlayerState
 {
     Idle,
@@ -9,28 +19,40 @@ public enum EPlayerState
     Dead,
 
 }
+public enum EPlayerAirState
+{
+    None,
+    OnAir,
+    AirAttack
+}
 public class Player : Entity
 {
-    public BoxCollider2D upperCutArea;
-    public BoxCollider2D baseAttackArea;
-    private EPlayerState state;
-    public EPlayerState StateProfull
+    private class WeaponAttackAreaClass : OdinSerializeAttribute
     {
-        get { return state; }
-        set
-        {
-            if (state != value)
-            {
-                animatorManager.AnimationPlay(value.ToString());
-            }
-            state = value;
-        }
+        [DictionaryDrawerSettings]
+        public Dictionary<EPlayerWeaponState, BoxCollider2D[]> weaponGroundAttack;
+        [DictionaryDrawerSettings]
+        public Dictionary<EPlayerWeaponState, BoxCollider2D>[] weaponOnAirAttackArea;
+        [DictionaryDrawerSettings]
+        public Dictionary<EPlayerWeaponState, BoxCollider2D> weaponUpperCutArea;
     }
+
 
     public bool onAir;
     public float upperForcePower;
 
     public float attackDamage;
+
+    [Header("Serializeable Variable")]
+
+    [SerializeField]
+    private WeaponAttackAreaClass weaponAttackAreaClass;
+    [SerializeField]
+    private EPlayerState state;
+    [SerializeField]
+    private EPlayerAirState airState;
+    [SerializeField]
+    private EPlayerWeaponState playerWeaponState;
 
     private int lookDir;
     [SerializeField]
@@ -39,20 +61,26 @@ public class Player : Entity
     private float spd;
 
     private SpriteRenderer spriteRenderer;
-    private AnimatorManager animatorManager;
+    private Animator animator;
 
     protected override void Start()
     {
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animatorManager = GetComponent<AnimatorManager>();
-        animatorManager.AnimationPlay("Idle");
+        animator = GetComponent<Animator>();
+        state = EPlayerState.Idle;
     }
     private void Update()
     {
         PlayerInput();
         Move();
         onAir = isOnAir();
+        airState = onAir ? EPlayerAirState.OnAir : EPlayerAirState.None;
+        animator.SetInteger("State", (int)state);
+        animator.SetInteger("AirState", (int)airState);
+    }
+    private void FixedUpdate()
+    {
     }
     private void PlayerInput()
     {
@@ -73,6 +101,8 @@ public class Player : Entity
     {
         if (onAir) return;
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        state = EPlayerState.Jump;
+        onAir = true;
     }
     private void Move()
     {
@@ -81,11 +111,12 @@ public class Player : Entity
         {
             lookDir = (int)hor;
             spriteRenderer.flipX = lookDir == 1 ? false : true;
-            StateProfull = EPlayerState.Run;
+            if (!onAir && rb.velocity.y == 0)
+                state = EPlayerState.Run;
         }
-        else
+        else if (rb.velocity == Vector2.zero)
         {
-            StateProfull = EPlayerState.Idle;
+            state = EPlayerState.Idle;
         }
         var spdValue = hor * spd * Time.deltaTime;
 
@@ -93,7 +124,13 @@ public class Player : Entity
     }
     private void BaseAttack()
     {
-        var ray = AttackCollisionCheck(baseAttackArea);
+        BoxCollider2D collider2D = null;
+        if (airState == EPlayerAirState.OnAir)
+        {
+            collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
+        }
+
+        var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][0]);
         foreach (RaycastHit2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 1f);
@@ -104,7 +141,7 @@ public class Player : Entity
     }
     private void UpperCut()
     {
-        var ray = AttackCollisionCheck(upperCutArea);
+        var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState]);
         foreach (RaycastHit2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * upperForcePower, ForceMode2D.Impulse);

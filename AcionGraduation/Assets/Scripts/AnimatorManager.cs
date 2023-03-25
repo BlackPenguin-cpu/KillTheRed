@@ -1,8 +1,9 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Drawers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
-
 
 [System.Serializable]
 public class AnimationClip
@@ -19,24 +20,22 @@ public class AnimationClip
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimatorManager : SerializedMonoBehaviour
 {
-    [DictionaryDrawerSettings]
     public Dictionary<string, AnimationClip> animationClips;
+    public Action animationUpdate;
+    public DelegateDrawer<Action> delegateDrawer;
 
     private SpriteRenderer spriteRenderer;
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void Update()
-    {
-
-    }
-    public void AnimationPlay(string animationName)
+    public virtual void AnimationPlay(string animationName)
     {
         StopAllCoroutines();
         StartCoroutine(AnimatorPlay(animationName));
+
     }
-    private IEnumerator AnimatorPlay(string animationName)
+    protected virtual IEnumerator AnimatorPlay(string animationName, Action action = null)
     {
 
         AnimationClip animationClip = animationClips[animationName];
@@ -55,5 +54,8 @@ public class AnimatorManager : SerializedMonoBehaviour
 
         if (animationClip.isLoop)
             goto Loop;
+
+        if (action != null) action();
+
     }
 }
