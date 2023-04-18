@@ -32,7 +32,7 @@ public class Player : Entity
         [DictionaryDrawerSettings]
         public Dictionary<EPlayerWeaponState, BoxCollider2D[]> weaponGroundAttack;
         [DictionaryDrawerSettings]
-        public Dictionary<EPlayerWeaponState, BoxCollider2D>[] weaponOnAirAttackArea;
+        public Dictionary<EPlayerWeaponState, BoxCollider2D[]> weaponOnAirAttackArea;
         [DictionaryDrawerSettings]
         public Dictionary<EPlayerWeaponState, BoxCollider2D> weaponUpperCutArea;
     }
@@ -59,6 +59,7 @@ public class Player : Entity
     private float jumpPower;
     [SerializeField]
     private float spd;
+    private bool onAttack;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -78,6 +79,8 @@ public class Player : Entity
         airState = onAir ? EPlayerAirState.OnAir : EPlayerAirState.None;
         animator.SetInteger("State", (int)state);
         animator.SetInteger("AirState", (int)airState);
+        animator.SetInteger("WeaponState", (int)playerWeaponState);
+        animator.SetBool("OnAttack", onAttack);
     }
     private void FixedUpdate()
     {
@@ -114,7 +117,7 @@ public class Player : Entity
             if (!onAir && rb.velocity.y == 0)
                 state = EPlayerState.Run;
         }
-        else if (rb.velocity == Vector2.zero)
+        else if (state != EPlayerState.Attack && rb.velocity == Vector2.zero)
         {
             state = EPlayerState.Idle;
         }
@@ -122,15 +125,17 @@ public class Player : Entity
 
         transform.position += Vector3.right * spdValue;
     }
-    private void BaseAttack()
+    private void BaseAttack(int index = 0)
     {
         BoxCollider2D collider2D = null;
-        if (airState == EPlayerAirState.OnAir)
-        {
-            collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
-        }
 
-        var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][0]);
+        if (airState == EPlayerAirState.OnAir)
+            collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
+
+        state = EPlayerState.Attack;
+        onAttack = true;
+
+        var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index]);
         foreach (RaycastHit2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 1f);
@@ -138,6 +143,11 @@ public class Player : Entity
         }
 
         //if (onAir) rb.velocity = new Vector2(2.5f, 1);
+    }
+    public void AttackEnd()
+    {
+        onAttack = false;
+        state = EPlayerState.Idle;
     }
     private void UpperCut()
     {
