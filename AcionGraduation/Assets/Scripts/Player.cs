@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -19,11 +20,11 @@ public enum EPlayerState
     Dead,
 
 }
-public enum EPlayerAirState
+public enum EPlayerAttackState
 {
     None,
-    OnAir,
-    AirAttack
+    Upper,
+    OnAir
 }
 public class Player : Entity
 {
@@ -37,6 +38,7 @@ public class Player : Entity
         public Dictionary<EPlayerWeaponState, BoxCollider2D> weaponUpperCutArea;
     }
 
+    public Coroutine attackCoroutine;
 
     public bool onAir;
     public float upperForcePower;
@@ -50,7 +52,7 @@ public class Player : Entity
     [SerializeField]
     private EPlayerState state;
     [SerializeField]
-    private EPlayerAirState airState;
+    private EPlayerAttackState attackState;
     [SerializeField]
     private EPlayerWeaponState playerWeaponState;
 
@@ -76,14 +78,10 @@ public class Player : Entity
         PlayerInput();
         Move();
         onAir = isOnAir();
-        airState = onAir ? EPlayerAirState.OnAir : EPlayerAirState.None;
         animator.SetInteger("State", (int)state);
-        animator.SetInteger("AirState", (int)airState);
+        animator.SetInteger("AttackState", (int)attackState);
         animator.SetInteger("WeaponState", (int)playerWeaponState);
         animator.SetBool("OnAttack", onAttack);
-    }
-    private void FixedUpdate()
-    {
     }
     private void PlayerInput()
     {
@@ -91,13 +89,16 @@ public class Player : Entity
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.X) && Input.GetKey(KeyCode.UpArrow))
-        {
-            UpperCut();
-        }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            BaseAttack();
+            if (Input.GetKey(KeyCode.UpArrow))
+                UpperCut();
+
+            state = EPlayerState.Attack;
+
+            if (attackCoroutine != null)
+                StopCoroutine(attackCoroutine);
+            attackCoroutine = StartCoroutine(AttackDelay());
         }
     }
     private void Jump()
@@ -129,39 +130,56 @@ public class Player : Entity
     {
         BoxCollider2D collider2D = null;
 
-        if (airState == EPlayerAirState.OnAir)
+        if (attackState == EPlayerAttackState.Upper)
             collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
+        else if (onAir)
+            collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[playerWeaponState][index];
+        else
+            collider2D = weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index];
 
-        state = EPlayerState.Attack;
-        onAttack = true;
-
-        var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index]);
-        foreach (RaycastHit2D physics2D in ray)
+        var ray = AttackCollisionCheck(collider2D);
+        foreach (Collider2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 1f);
             physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
         }
 
         //if (onAir) rb.velocity = new Vector2(2.5f, 1);
+
     }
     public void AttackEnd()
     {
         onAttack = false;
         state = EPlayerState.Idle;
+        attackState = EPlayerAttackState.None;
+    }
+    public void AttackStart()
+    {
+        onAttack = true;
+    }
+    private IEnumerator AttackDelay()
+    {
+        yield return null;
+        onAttack = true;
+        yield return new WaitForSeconds(0.5f);
+        AttackEnd();
     }
     private void UpperCut()
     {
+        attackState = EPlayerAttackState.Upper;
         var ray = AttackCollisionCheck(weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState]);
-        foreach (RaycastHit2D physics2D in ray)
+        foreach (Collider2D physics2D in ray)
         {
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * upperForcePower, ForceMode2D.Impulse);
         }
+
+
         rb.AddForce(Vector2.up * upperForcePower, ForceMode2D.Impulse);
     }
-    private RaycastHit2D[] AttackCollisionCheck(BoxCollider2D collider2D)
+    private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
     {
         int layerMask = 1 << LayerMask.NameToLayer("Enemy");
-        return Physics2D.BoxCastAll(transform.position + (Vector3)collider2D.offset * lookDir, collider2D.size, 0, Vector2.right, 0, layerMask);
+        return Physics2D.OverlapBoxAll(transform.position + (Vector3)collider2D.offset * lookDir, collider2D.size, 0, layerMask);
     }
 
     protected override void Die()

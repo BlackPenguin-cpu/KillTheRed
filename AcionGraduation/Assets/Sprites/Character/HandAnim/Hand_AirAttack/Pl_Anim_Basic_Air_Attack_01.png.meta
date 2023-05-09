@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 956e63ecb58db164e8d58a6a6591113d
+guid: 0e70c7b7ab1f5774ab4c3fc7c4820bf0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,274 +105,295 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_0
+      name: Pl_Anim_Basic_Air_Attack_01_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43b9f89215ed6e04fa87f1164f06631d
-      internalID: 2030448946
+      spriteID: 36dd5e027b0cb0843aec03d3c2a62cbb
+      internalID: -1552870629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_1
+      name: Pl_Anim_Basic_Air_Attack_01_1
       rect:
         serializedVersion: 2
-        x: 255
+        x: 275
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f500ec08ade68e46b8d1ab98cc9456e
-      internalID: 951183305
+      spriteID: a2d890c66954eed429aa5a9663e59abb
+      internalID: -514657272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_2
+      name: Pl_Anim_Basic_Air_Attack_01_2
       rect:
         serializedVersion: 2
-        x: 510
+        x: 550
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0738d7892f2fc5c4c8a4a7a30e222eb9
-      internalID: -1582894274
+      spriteID: 59b86856d9c84574d969f9dc3566d4df
+      internalID: 1099409246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_3
+      name: Pl_Anim_Basic_Air_Attack_01_3
       rect:
         serializedVersion: 2
-        x: 765
+        x: 825
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dca61f00e99c0746ba4dca6272e4bf3
-      internalID: 177942481
+      spriteID: 0a10281ffe3e42e409df37c49135d3f9
+      internalID: 1571430126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_4
+      name: Pl_Anim_Basic_Air_Attack_01_4
       rect:
         serializedVersion: 2
-        x: 1020
+        x: 1100
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66a567f7805c3c3429e3f45738ecaef4
-      internalID: -605184049
+      spriteID: 97c25be9073cd3b4f8638e88f681ba65
+      internalID: -209303511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_5
+      name: Pl_Anim_Basic_Air_Attack_01_5
       rect:
         serializedVersion: 2
-        x: 1275
+        x: 1375
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16c99bc22e7c2954da4a28b7f47ac8c6
-      internalID: 526351321
+      spriteID: 22a255c17e28a5941ab3c7afc2960a0d
+      internalID: -285841516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_6
+      name: Pl_Anim_Basic_Air_Attack_01_6
       rect:
         serializedVersion: 2
-        x: 1530
+        x: 1650
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad049fd6a74637743a7ca377ec50f2b1
-      internalID: -1241685599
+      spriteID: 51f0e9e6c00678f4981b677b89fe4a6d
+      internalID: 475385000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_7
+      name: Pl_Anim_Basic_Air_Attack_01_7
       rect:
         serializedVersion: 2
-        x: 1785
+        x: 1925
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfeab4299cbc50d4cb8c4fe1d4824c4c
-      internalID: -1563179625
+      spriteID: 575098f938c37ed409b4d00c80fb1604
+      internalID: -765418726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_8
+      name: Pl_Anim_Basic_Air_Attack_01_8
       rect:
         serializedVersion: 2
-        x: 2040
+        x: 2200
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d344c0cf63bf64b909aeb25cc9752e
-      internalID: -1676761139
+      spriteID: 9b5c98af71ceb5f46a62d8d50b3ecdd8
+      internalID: 1332729420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_9
+      name: Pl_Anim_Basic_Air_Attack_01_9
       rect:
         serializedVersion: 2
-        x: 2295
+        x: 2475
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 265758b8c79a02d44be17655ae734665
-      internalID: 81166552
+      spriteID: 3df4af9b4ad4a3344962b74fba36fedd
+      internalID: -828591572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_10
+      name: Pl_Anim_Basic_Air_Attack_01_10
       rect:
         serializedVersion: 2
-        x: 2550
+        x: 2750
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2378cb26ea67b014bb4f5a3e1cc8d555
-      internalID: 1158786530
+      spriteID: 37a0bdf855293d049b84d3bcc8f47426
+      internalID: 273559115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_11
+      name: Pl_Anim_Basic_Air_Attack_01_11
       rect:
         serializedVersion: 2
-        x: 2805
+        x: 3025
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5fd25c5f84c5e346ad55cc0ea6e1a0a
-      internalID: -1801274115
+      spriteID: 0bfa96077888f7f40bcad3fd7cd24bec
+      internalID: 89872312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Basic_Attack_04_12
+      name: Pl_Anim_Basic_Air_Attack_01_12
       rect:
         serializedVersion: 2
-        x: 3060
+        x: 3300
         y: 0
-        width: 255
-        height: 165
+        width: 275
+        height: 155
       alignment: 9
-      pivot: {x: 0.22, y: 0.07}
+      pivot: {x: 0.4, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 144422b3eff83114089ae78d3c2750f1
-      internalID: -1017343000
+      spriteID: 3c807d1f4854b2345bfcd26103bc9aab
+      internalID: -593868998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Basic_Air_Attack_01_13
+      rect:
+        serializedVersion: 2
+        x: 3575
+        y: 0
+        width: 275
+        height: 155
+      alignment: 9
+      pivot: {x: 0.4, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf4745b755eebe46a16c5c4c9d4d893
+      internalID: 1365312794
       vertices: []
       indices: 
       edges: []
@@ -388,19 +409,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pl_Anim_Basic_Attack_04_0: 2030448946
-      Pl_Anim_Basic_Attack_04_1: 951183305
-      Pl_Anim_Basic_Attack_04_10: 1158786530
-      Pl_Anim_Basic_Attack_04_11: -1801274115
-      Pl_Anim_Basic_Attack_04_12: -1017343000
-      Pl_Anim_Basic_Attack_04_2: -1582894274
-      Pl_Anim_Basic_Attack_04_3: 177942481
-      Pl_Anim_Basic_Attack_04_4: -605184049
-      Pl_Anim_Basic_Attack_04_5: 526351321
-      Pl_Anim_Basic_Attack_04_6: -1241685599
-      Pl_Anim_Basic_Attack_04_7: -1563179625
-      Pl_Anim_Basic_Attack_04_8: -1676761139
-      Pl_Anim_Basic_Attack_04_9: 81166552
+      Pl_Anim_Basic_Air_Attack_01_0: -1552870629
+      Pl_Anim_Basic_Air_Attack_01_1: -514657272
+      Pl_Anim_Basic_Air_Attack_01_10: 273559115
+      Pl_Anim_Basic_Air_Attack_01_11: 89872312
+      Pl_Anim_Basic_Air_Attack_01_12: -593868998
+      Pl_Anim_Basic_Air_Attack_01_13: 1365312794
+      Pl_Anim_Basic_Air_Attack_01_2: 1099409246
+      Pl_Anim_Basic_Air_Attack_01_3: 1571430126
+      Pl_Anim_Basic_Air_Attack_01_4: -209303511
+      Pl_Anim_Basic_Air_Attack_01_5: -285841516
+      Pl_Anim_Basic_Air_Attack_01_6: 475385000
+      Pl_Anim_Basic_Air_Attack_01_7: -765418726
+      Pl_Anim_Basic_Air_Attack_01_8: 1332729420
+      Pl_Anim_Basic_Air_Attack_01_9: -828591572
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
