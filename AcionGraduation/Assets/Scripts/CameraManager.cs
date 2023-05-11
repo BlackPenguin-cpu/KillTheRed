@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
     public float speed;
+    public Image FlashScreen;
 
     private Player playerObj;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
