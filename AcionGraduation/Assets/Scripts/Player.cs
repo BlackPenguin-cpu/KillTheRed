@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using DG.Tweening;
+
 public enum EPlayerWeaponState
 {
     Hand,
@@ -76,8 +78,8 @@ public partial class Player : Entity
     }
     private void Update()
     {
-        PlayerInput();
         Move();
+        PlayerInput();
         onAir = isOnAir();
         animator.SetInteger("State", (int)state);
         animator.SetInteger("AttackState", (int)attackState);
@@ -102,6 +104,13 @@ public partial class Player : Entity
             if (attackCoroutine != null)
                 StopCoroutine(attackCoroutine);
             attackCoroutine = StartCoroutine(AttackDelay());
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (playerWeaponState == EPlayerWeaponState.Sword)
+                playerWeaponState = EPlayerWeaponState.Hand;
+            else
+                playerWeaponState = EPlayerWeaponState.Sword;
         }
     }
     private void Jump()
@@ -157,6 +166,7 @@ public partial class Player : Entity
             physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 2;
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(lookDir * 3, 2.5f), ForceMode2D.Impulse);
         }
+        Camera.main.DOShakePosition(0.2f,2);
     }
     private void BaseAttack(int index = 0)
     {
@@ -226,7 +236,7 @@ public partial class Player : Entity
     private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
     {
         int layerMask = 1 << LayerMask.NameToLayer("Enemy");
-        return Physics2D.OverlapBoxAll(transform.position + (Vector3)collider2D.offset * lookDir, collider2D.size, 0, layerMask);
+        return Physics2D.OverlapBoxAll(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
 
     #region PlayerSkillEffect
@@ -234,7 +244,7 @@ public partial class Player : Entity
     #region Hand
     private void HandAirAttackAxeKick()
     {
-        var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[playerWeaponState][2]);
+        var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hand][2]);
         foreach (Collider2D obj in objs)
         {
             obj.GetComponent<Rigidbody2D>().AddForce(Vector3.down * 10, ForceMode2D.Impulse);
@@ -248,7 +258,19 @@ public partial class Player : Entity
         transform.position = new Vector2(obj.point.x, obj.point.y);
     }
     #endregion
+    #region Sword
+    private void SwordDownAttack()
+    {
+        var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Sword][3]);
+        foreach (Collider2D obj in objs)
+        {
+            obj.GetComponent<Entity>().Hp -= attackDamage;
+            obj.GetComponent<Rigidbody2D>().AddForce(new Vector3(20 * lookDir, -15), ForceMode2D.Impulse);
+        }
 
+        Camera.main.DOShakePosition(0.2f,2);
+    }
+    #endregion
     #endregion
     protected override void Die()
     {

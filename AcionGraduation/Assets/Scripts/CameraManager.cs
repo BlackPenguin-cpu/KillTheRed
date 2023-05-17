@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
@@ -21,6 +22,6 @@ public class CameraManager : MonoBehaviour
     }
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, playerObj.transform.position + new Vector3(0, 0, -10), Time.deltaTime * speed);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(playerObj.transform.position.x, 0, -10), Time.deltaTime * speed);
     }
 }

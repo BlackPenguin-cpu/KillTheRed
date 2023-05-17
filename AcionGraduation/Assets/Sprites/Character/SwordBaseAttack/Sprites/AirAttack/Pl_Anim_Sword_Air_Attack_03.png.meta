@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 89f1b0e90c41b4046b7cd0f71a8c1154
+guid: 3e9666c431962db4a98707aa06cb6b0e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,148 +105,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_0
+      name: Pl_Anim_Sword_Air_Attack_03_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056bd8de67eb933408ded43920174f7d
-      internalID: 1386721748
+      spriteID: 66d41aaf2839ee34c9bb1a603d895b52
+      internalID: 853801587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_1
+      name: Pl_Anim_Sword_Air_Attack_03_1
       rect:
         serializedVersion: 2
-        x: 430
+        x: 315
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6eeb19ea5ee73534d9b3396af3cf4314
-      internalID: 244527253
+      spriteID: 17f64cfd5e2cb6947991b789a4b0539f
+      internalID: 255888489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_2
+      name: Pl_Anim_Sword_Air_Attack_03_2
       rect:
         serializedVersion: 2
-        x: 860
+        x: 630
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7af8d705423400a4ea76c666e4887719
-      internalID: -270300777
+      spriteID: 43bb486abb52b954f87526d7739fe011
+      internalID: 1700498395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_3
+      name: Pl_Anim_Sword_Air_Attack_03_3
       rect:
         serializedVersion: 2
-        x: 1291
+        x: 945
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0c323dc2706ed344ad22117e035f4c1
-      internalID: 1308811223
+      spriteID: 75d96f146233f0e4a88e33497453cc77
+      internalID: 1261691840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_4
+      name: Pl_Anim_Sword_Air_Attack_03_4
       rect:
         serializedVersion: 2
-        x: 1720
+        x: 1260
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 025ebdf75eb013241b0426c298752feb
-      internalID: 960550777
+      spriteID: 67e2841fb60a5e34b873242973fe949c
+      internalID: -26894875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_5
+      name: Pl_Anim_Sword_Air_Attack_03_5
       rect:
         serializedVersion: 2
-        x: 2150
+        x: 1575
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47d2a6774540e0c4ab22447b037ab9bf
-      internalID: 881021938
+      spriteID: 13256b5b301b0f94da5db67563891874
+      internalID: 809526393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_02_6
+      name: Pl_Anim_Sword_Air_Attack_03_6
       rect:
         serializedVersion: 2
-        x: 2580
+        x: 1890
         y: 0
-        width: 430
-        height: 210
+        width: 315
+        height: 235
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.29}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7254d8ddb902e234f8dff7f93ac7ee05
-      internalID: 1991572224
+      spriteID: 3b0ef2cfcba4d1e4f9b168125be66ab7
+      internalID: 1800146629
       vertices: []
       indices: 
       edges: []
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pl_Anim_Sword_Attack_02_0: 1386721748
-      Pl_Anim_Sword_Attack_02_1: 244527253
-      Pl_Anim_Sword_Attack_02_2: -270300777
-      Pl_Anim_Sword_Attack_02_3: 1308811223
-      Pl_Anim_Sword_Attack_02_4: 960550777
-      Pl_Anim_Sword_Attack_02_5: 881021938
-      Pl_Anim_Sword_Attack_02_6: 1991572224
+      Pl_Anim_Sword_Air_Attack_03_0: 853801587
+      Pl_Anim_Sword_Air_Attack_03_1: 255888489
+      Pl_Anim_Sword_Air_Attack_03_2: 1700498395
+      Pl_Anim_Sword_Air_Attack_03_3: 1261691840
+      Pl_Anim_Sword_Air_Attack_03_4: -26894875
+      Pl_Anim_Sword_Air_Attack_03_5: 809526393
+      Pl_Anim_Sword_Air_Attack_03_6: 1800146629
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

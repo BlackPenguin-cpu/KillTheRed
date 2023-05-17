@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4241530c50d38594da00611a61e954d7
+guid: 89f1b0e90c41b4046b7cd0f71a8c1154
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_0
+      name: Pl_Anim_Sword_Attack_02_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f04ce839304b43458aa825cee5d462c
-      internalID: 690175586
+      spriteID: 056bd8de67eb933408ded43920174f7d
+      internalID: 1386721748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_1
+      name: Pl_Anim_Sword_Attack_02_1
       rect:
         serializedVersion: 2
         x: 430
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec7429d6c4a58d649834c355b0c64a27
-      internalID: 1459780788
+      spriteID: 6eeb19ea5ee73534d9b3396af3cf4314
+      internalID: 244527253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_2
+      name: Pl_Anim_Sword_Attack_02_2
       rect:
         serializedVersion: 2
         x: 860
@@ -161,17 +161,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a465cc7b6da8d8b478b805b5cdf85a29
-      internalID: -924830981
+      spriteID: 7af8d705423400a4ea76c666e4887719
+      internalID: -270300777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_3
+      name: Pl_Anim_Sword_Attack_02_3
       rect:
         serializedVersion: 2
-        x: 1290
+        x: 1291
         y: 0
         width: 430
         height: 210
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccea3c8736c40ab40b9f2fc40dbc42e8
-      internalID: -1864990345
+      spriteID: b0c323dc2706ed344ad22117e035f4c1
+      internalID: 1308811223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_4
+      name: Pl_Anim_Sword_Attack_02_4
       rect:
         serializedVersion: 2
         x: 1720
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68aa4ce866148f44ebbf363aa40ec0c1
-      internalID: -1354303756
+      spriteID: 025ebdf75eb013241b0426c298752feb
+      internalID: 960550777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_5
+      name: Pl_Anim_Sword_Attack_02_5
       rect:
         serializedVersion: 2
         x: 2150
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a68ba816b97a9894b8337f1343911ebc
-      internalID: 1348693730
+      spriteID: 47d2a6774540e0c4ab22447b037ab9bf
+      internalID: 881021938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_03_6
+      name: Pl_Anim_Sword_Attack_02_6
       rect:
         serializedVersion: 2
         x: 2580
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fffbbda75765dc448099cbb462af15a
-      internalID: 1578201680
+      spriteID: 7254d8ddb902e234f8dff7f93ac7ee05
+      internalID: 1991572224
       vertices: []
       indices: 
       edges: []
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pl_Anim_Sword_Attack_03_0: 690175586
-      Pl_Anim_Sword_Attack_03_1: 1459780788
-      Pl_Anim_Sword_Attack_03_2: -924830981
-      Pl_Anim_Sword_Attack_03_3: -1864990345
-      Pl_Anim_Sword_Attack_03_4: -1354303756
-      Pl_Anim_Sword_Attack_03_5: 1348693730
-      Pl_Anim_Sword_Attack_03_6: 1578201680
+      Pl_Anim_Sword_Attack_02_0: 1386721748
+      Pl_Anim_Sword_Attack_02_1: 244527253
+      Pl_Anim_Sword_Attack_02_2: -270300777
+      Pl_Anim_Sword_Attack_02_3: 1308811223
+      Pl_Anim_Sword_Attack_02_4: 960550777
+      Pl_Anim_Sword_Attack_02_5: 881021938
+      Pl_Anim_Sword_Attack_02_6: 1991572224
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 12187cb8fe05f2b49ab67d466cc44ebc
+guid: 376a17ac1e0183b4aae511eeed4ac415
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_0
+      name: Pl_Anim_Sword_Airbone_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a12feaaf58549454888c32f3cd16da18
-      internalID: -968945189
+      spriteID: c407c7187458f784abc8bb0f7a4936b5
+      internalID: 1919146886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_1
+      name: Pl_Anim_Sword_Airbone_1
       rect:
         serializedVersion: 2
-        x: 430
+        x: 335
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cfee05a18dd2f04e9c73990ee8934e5
-      internalID: -945454414
+      spriteID: 1de47323052658d4a903f08d28796bdd
+      internalID: 457235541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_2
+      name: Pl_Anim_Sword_Airbone_2
       rect:
         serializedVersion: 2
-        x: 860
+        x: 670
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8654380211bdb7641be2f62b0b151cd3
-      internalID: -307628652
+      spriteID: 0a1ee3baeeabb904fa9b5c5812beadb6
+      internalID: 367137956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_3
+      name: Pl_Anim_Sword_Airbone_3
       rect:
         serializedVersion: 2
-        x: 1290
+        x: 1005
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68fce57fd479cf34b9f6b70b1014a723
-      internalID: 1231072141
+      spriteID: d02b1735d0421b04e828940eb1087168
+      internalID: -1309197687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_4
+      name: Pl_Anim_Sword_Airbone_4
       rect:
         serializedVersion: 2
-        x: 1720
+        x: 1340
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5db775de8b1afad478febf4249bdf1c9
-      internalID: -585756610
+      spriteID: 749acb118238e414abf9ac697f63128f
+      internalID: 1959832254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_5
+      name: Pl_Anim_Sword_Airbone_5
       rect:
         serializedVersion: 2
-        x: 2150
+        x: 1675
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2c7fb89018b6e64cad5db50c3af7046
-      internalID: 2090667951
+      spriteID: 6ad0d772239f25540a171e17bf52a3d3
+      internalID: -1684335769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_6
+      name: Pl_Anim_Sword_Airbone_6
       rect:
         serializedVersion: 2
-        x: 2580
+        x: 2010
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 145c77883513d594692e96f9e0903bc7
-      internalID: 72611678
+      spriteID: 22413c5ac0dd9444c8b1b8e9518363f3
+      internalID: -1910993889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_7
+      name: Pl_Anim_Sword_Airbone_7
       rect:
         serializedVersion: 2
-        x: 3009
+        x: 2345
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d5b889d27369b44ba2a22cb6c91618d
-      internalID: -992964890
+      spriteID: 8257156234cc94e4dbdcd8ab4270123f
+      internalID: -1318636946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_8
+      name: Pl_Anim_Sword_Airbone_8
       rect:
         serializedVersion: 2
-        x: 3440
+        x: 2680
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5e5339057f72d84aabc33d74e0dbfaf
-      internalID: 1114886938
+      spriteID: aed2b5ce748a1f4468a18168a4f16d77
+      internalID: 1195904241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Sword_Attack_04_9
+      name: Pl_Anim_Sword_Airbone_9
       rect:
         serializedVersion: 2
-        x: 3870
+        x: 3015
         y: 0
-        width: 430
-        height: 210
+        width: 335
+        height: 250
       alignment: 9
       pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,8 +308,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f12cc24a008a8f94b98f034a5608c1e5
-      internalID: -406564711
+      spriteID: 7295f2591eed7db45abac81b0719c5ad
+      internalID: -1136768005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Sword_Airbone_10
+      rect:
+        serializedVersion: 2
+        x: 3350
+        y: 0
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b1b474c2a997048bb224b8ab9c3c5d
+      internalID: -1575809800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Sword_Airbone_11
+      rect:
+        serializedVersion: 2
+        x: 3685
+        y: 0
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b7f283608e7718468e90091d9694723
+      internalID: 818273275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Sword_Airbone_12
+      rect:
+        serializedVersion: 2
+        x: 4020
+        y: 0
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa292ea8edbee1c45892bc4ea49ac98b
+      internalID: -947871745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Sword_Airbone_13
+      rect:
+        serializedVersion: 2
+        x: 4355
+        y: 0
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e1a569e6556fb40a42710463a1a774
+      internalID: -1978690837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pl_Anim_Sword_Airbone_14
+      rect:
+        serializedVersion: 2
+        x: 4690
+        y: 0
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a01054b56ff56045b3be7c147dcdc3f
+      internalID: 992895964
       vertices: []
       indices: 
       edges: []
@@ -325,16 +430,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pl_Anim_Sword_Attack_04_0: -968945189
-      Pl_Anim_Sword_Attack_04_1: -945454414
-      Pl_Anim_Sword_Attack_04_2: -307628652
-      Pl_Anim_Sword_Attack_04_3: 1231072141
-      Pl_Anim_Sword_Attack_04_4: -585756610
-      Pl_Anim_Sword_Attack_04_5: 2090667951
-      Pl_Anim_Sword_Attack_04_6: 72611678
-      Pl_Anim_Sword_Attack_04_7: -992964890
-      Pl_Anim_Sword_Attack_04_8: 1114886938
-      Pl_Anim_Sword_Attack_04_9: -406564711
+      Pl_Anim_Sword_Airbone_0: 1919146886
+      Pl_Anim_Sword_Airbone_1: 457235541
+      Pl_Anim_Sword_Airbone_10: -1575809800
+      Pl_Anim_Sword_Airbone_11: 818273275
+      Pl_Anim_Sword_Airbone_12: -947871745
+      Pl_Anim_Sword_Airbone_13: -1978690837
+      Pl_Anim_Sword_Airbone_14: 992895964
+      Pl_Anim_Sword_Airbone_2: 367137956
+      Pl_Anim_Sword_Airbone_3: -1309197687
+      Pl_Anim_Sword_Airbone_4: 1959832254
+      Pl_Anim_Sword_Airbone_5: -1684335769
+      Pl_Anim_Sword_Airbone_6: -1910993889
+      Pl_Anim_Sword_Airbone_7: -1318636946
+      Pl_Anim_Sword_Airbone_8: 1195904241
+      Pl_Anim_Sword_Airbone_9: -1136768005
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
