@@ -49,7 +49,7 @@ public abstract class Entity : SerializedMonoBehaviour
     protected bool isOnAir()
     {
         int layerMask = 1 << LayerMask.NameToLayer("Platform");
-        var ray = Physics2D.BoxCast((Vector2)transform.position + col.offset, col.size, 0, Vector2.down, 0.01f, layerMask);
+        var ray = Physics2D.BoxCast((Vector2)transform.position + col.offset, col.size, 0, Vector2.down, 0.05f, layerMask);
         if (ray.collider == null) return true;
         else return false;
     }

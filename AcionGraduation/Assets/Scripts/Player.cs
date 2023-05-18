@@ -19,7 +19,7 @@ public enum EPlayerState
     Jump,
     Attack,
     Dead,
-
+    Dash
 }
 public enum EPlayerAttackState
 {
@@ -68,6 +68,8 @@ public partial class Player : Entity
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    private float dashCooldown = 1;
+
     protected override void Start()
     {
         base.Start();
@@ -85,9 +87,16 @@ public partial class Player : Entity
         animator.SetInteger("AttackState", (int)attackState);
         animator.SetInteger("WeaponState", (int)playerWeaponState);
         animator.SetBool("OnAttack", onAttack);
+        animator.SetBool("OnAir", onAir);
+
+        dashCooldown -= Time.deltaTime;
     }
     private void PlayerInput()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Dash();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             Jump();
@@ -107,10 +116,7 @@ public partial class Player : Entity
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            if (playerWeaponState == EPlayerWeaponState.Sword)
-                playerWeaponState = EPlayerWeaponState.Hand;
-            else
-                playerWeaponState = EPlayerWeaponState.Sword;
+            WeaponChanage(EPlayerWeaponState.Sword);
         }
     }
     private void Jump()
@@ -122,7 +128,7 @@ public partial class Player : Entity
     }
     private void Move()
     {
-        if (onAttack) return;
+        if (onAttack || state == EPlayerState.Dash) return;
         var hor = Input.GetAxisRaw("Horizontal");
         if (hor != 0)
         {
@@ -138,6 +144,38 @@ public partial class Player : Entity
         var spdValue = hor * spd * Time.deltaTime;
 
         transform.position += Vector3.right * spdValue;
+    }
+    private void Dash()
+    {
+        if (state == EPlayerState.Attack) return;
+        if (dashCooldown < 0)
+            dashCooldown = 1;
+        else
+            return;
+        float duration = 0.1f;
+
+        Vector3 pos = transform.position;
+        StartCoroutine(cor());
+        IEnumerator cor()
+        {
+            state = EPlayerState.Dash;
+            while (duration > 0)
+            {
+                pos += Vector3.right * lookDir * Time.deltaTime * 20;
+                transform.position = pos;
+                duration -= Time.deltaTime;
+                yield return null;
+            }
+            state = EPlayerState.Idle;
+        }
+
+    }
+    private void WeaponChanage(EPlayerWeaponState weaponState)
+    {
+        if (playerWeaponState == weaponState)
+            playerWeaponState = EPlayerWeaponState.Hand;
+        else
+            playerWeaponState = weaponState;
     }
     private void BigAttack(int index)
     {
@@ -166,7 +204,8 @@ public partial class Player : Entity
             physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 2;
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(lookDir * 3, 2.5f), ForceMode2D.Impulse);
         }
-        Camera.main.DOShakePosition(0.2f,2);
+        Camera.main.DOShakePosition(0.2f, 2);
+        CameraManager.instance.Flash(0.2f);
     }
     private void BaseAttack(int index = 0)
     {
@@ -265,10 +304,11 @@ public partial class Player : Entity
         foreach (Collider2D obj in objs)
         {
             obj.GetComponent<Entity>().Hp -= attackDamage;
-            obj.GetComponent<Rigidbody2D>().AddForce(new Vector3(20 * lookDir, -15), ForceMode2D.Impulse);
+            obj.GetComponent<Rigidbody2D>().AddForce(new Vector3(10 * lookDir, -15), ForceMode2D.Impulse);
         }
 
-        Camera.main.DOShakePosition(0.2f,2);
+        Camera.main.DOShakePosition(0.2f, 2);
+        CameraManager.instance.Flash(0.1f);
     }
     #endregion
     #endregion

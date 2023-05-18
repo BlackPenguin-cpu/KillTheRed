@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,5 +58,7 @@ public class BaseEnemy : Entity
                 stunTime = 0;
                 break;
         }
+
+        Camera.main.DOShakePosition(0.1f, 0.1f);
     }
 }
