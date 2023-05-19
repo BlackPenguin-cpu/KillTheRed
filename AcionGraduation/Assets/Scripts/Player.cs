@@ -4,6 +4,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using DG.Tweening;
+using static UnityEditor.PlayerSettings;
+using UnityEditor.U2D;
+using System;
 
 public enum EPlayerWeaponState
 {
@@ -161,14 +164,35 @@ public partial class Player : Entity
             state = EPlayerState.Dash;
             while (duration > 0)
             {
-                pos += Vector3.right * lookDir * Time.deltaTime * 20;
+                ShadowInst(0.1f);
+
+                pos += Vector3.right * (lookDir * Time.deltaTime * 20);
                 transform.position = pos;
                 duration -= Time.deltaTime;
                 yield return null;
             }
             state = EPlayerState.Idle;
         }
+    }
 
+    private void ShadowInst(float duration)
+    {
+        GameObject obj = Instantiate(new GameObject("Player_Shadow", typeof(SpriteRenderer)), transform.position, Quaternion.identity);
+        SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
+        objRenderer.sprite = spriteRenderer.sprite;
+        Color alphaValue = spriteRenderer.color;
+
+        StartCoroutine(corutine());
+        IEnumerator corutine()
+        {
+            while (alphaValue.a > 0)
+            {
+                objRenderer.color = alphaValue;
+                alphaValue.a -= Time.deltaTime / duration;
+                yield return null;
+            }
+            Destroy(obj.gameObject);
+        }
     }
     private void WeaponChanage(EPlayerWeaponState weaponState)
     {
