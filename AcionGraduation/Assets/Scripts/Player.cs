@@ -32,6 +32,7 @@ public enum EPlayerAttackState
 }
 public partial class Player : Entity
 {
+    public static Player instance;
     private class WeaponAttackAreaClass : OdinSerializeAttribute
     {
         [DictionaryDrawerSettings]
@@ -73,6 +74,10 @@ public partial class Player : Entity
 
     private float dashCooldown = 1;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     protected override void Start()
     {
         base.Start();
@@ -164,23 +169,25 @@ public partial class Player : Entity
             state = EPlayerState.Dash;
             while (duration > 0)
             {
-                ShadowInst(0.1f);
+                ShadowInst(0.1f, 0.5f);
 
-                pos += Vector3.right * (lookDir * Time.deltaTime * 20);
+                pos += Vector3.right * (lookDir * Time.deltaTime * 30);
                 transform.position = pos;
                 duration -= Time.deltaTime;
                 yield return null;
             }
+            rb.velocity = Vector3.zero;
             state = EPlayerState.Idle;
         }
     }
 
-    private void ShadowInst(float duration)
+    private void ShadowInst(float duration, float startAlpha = 1)
     {
         GameObject obj = Instantiate(new GameObject("Player_Shadow", typeof(SpriteRenderer)), transform.position, Quaternion.identity);
         SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
+        objRenderer.flipX = spriteRenderer.flipX;
         objRenderer.sprite = spriteRenderer.sprite;
-        Color alphaValue = spriteRenderer.color;
+        Color alphaValue = spriteRenderer.color - Color.black * startAlpha;
 
         StartCoroutine(corutine());
         IEnumerator corutine()
@@ -188,7 +195,7 @@ public partial class Player : Entity
             while (alphaValue.a > 0)
             {
                 objRenderer.color = alphaValue;
-                alphaValue.a -= Time.deltaTime / duration;
+                alphaValue.a -= Time.deltaTime / duration * startAlpha;
                 yield return null;
             }
             Destroy(obj.gameObject);
@@ -310,7 +317,7 @@ public partial class Player : Entity
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hand][2]);
         foreach (Collider2D obj in objs)
         {
-            obj.GetComponent<Rigidbody2D>().AddForce(Vector3.down * 10, ForceMode2D.Impulse);
+            obj.GetComponent<Rigidbody2D>().AddForce(Vector3.down * 20, ForceMode2D.Impulse);
         }
     }
     private void HandAirAttackFinish()

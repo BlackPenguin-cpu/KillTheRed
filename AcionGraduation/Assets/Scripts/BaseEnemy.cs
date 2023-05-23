@@ -1,11 +1,13 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class BaseEnemy : Entity
 {
     protected float stunTime;
+    protected int lookDir;
     protected virtual void Update()
     {
         StandUp();
@@ -60,5 +62,11 @@ public class BaseEnemy : Entity
         }
 
         Camera.main.DOShakePosition(0.1f, 0.1f);
+    }
+
+    protected Collider2D AttackCollisionCheck(BoxCollider2D collider2D)
+    {
+        int layerMask = 1 << LayerMask.NameToLayer("Player");
+        return Physics2D.OverlapBox(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
 }
