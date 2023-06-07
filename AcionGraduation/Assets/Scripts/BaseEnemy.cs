@@ -7,6 +7,7 @@ using UnityEngine;
 public class BaseEnemy : Entity
 {
     protected float stunTime;
+    protected float attackValue;
     protected int lookDir;
     protected virtual void Update()
     {

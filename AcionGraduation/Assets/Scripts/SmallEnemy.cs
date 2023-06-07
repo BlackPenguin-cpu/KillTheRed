@@ -17,13 +17,16 @@ public class SmallEnemy : BaseEnemy
 
     private Player player;
     private Animator animator;
-    private RuntimeAnimatorController runtimeAnimatorController;
     private SpriteRenderer spriteRenderer;
+
+    [Tooltip("AttackCollider")]
+    BoxCollider2D AttackArea;
     protected override void Start()
     {
         base.Start();
         animator = GetComponent<Animator>();
-        runtimeAnimatorController = animator.runtimeAnimatorController;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        AttackArea = transform.GetChild(0).GetComponent<BoxCollider2D>();
         player = Player.instance;
         StartCoroutine(TracePlayer());
     }
@@ -40,6 +43,7 @@ public class SmallEnemy : BaseEnemy
     private void Move()
     {
         int dir = (int)(player.transform.position.x - transform.position.x);
+        if (dir == 0) return;
         lookDir = dir / Mathf.Abs(dir);
 
         transform.position += Vector3.right * lookDir * speed * Time.deltaTime;
@@ -51,21 +55,27 @@ public class SmallEnemy : BaseEnemy
 
         while (state != EEnemyState.Dead)
         {
-            if (Vector2.Distance(player.transform.position, transform.position) > 1)
-            {
-                state = EEnemyState.Trace;
-            }
-            else
-            {
-                state = EEnemyState.Attack;
+            state = Mathf.Abs(player.transform.position.x - transform.position.x) > 1 ? EEnemyState.Trace : EEnemyState.Attack;
+
+            if (state == EEnemyState.Attack)
                 yield return StartCoroutine(Attack());
-            }
-            yield return waitSeconds;
+            else
+                yield return waitSeconds;
         }
     }
     private IEnumerator Attack()
     {
-        new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
         yield return null;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+        state = EEnemyState.Trace;
+
+        yield return null;
+    }
+    private void AttackCheck()
+    {
+        if (AttackCollisionCheck(AttackArea))
+        {
+            Player.instance.Hp -= attackValue;
+        }
     }
 }
