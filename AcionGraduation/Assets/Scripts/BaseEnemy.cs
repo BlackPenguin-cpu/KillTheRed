@@ -35,7 +35,8 @@ public class BaseEnemy : Entity
 
     protected override void Die()
     {
-        Destroy(gameObject);
+        if (hitState == EHitState.Lagdoll)
+            Destroy(gameObject);
     }
     protected override void Hit(float damage)
     {
@@ -51,11 +52,10 @@ public class BaseEnemy : Entity
                 }
                 break;
             case EHitState.Stun:
-                if (isOnAir())
-                {
+                if (!isOnAir())
                     hitState = EHitState.Lagdoll;
+                else
                     rb.gravityScale = 0.5f;
-                }
                 break;
             case EHitState.Lagdoll:
                 stunTime = 0;

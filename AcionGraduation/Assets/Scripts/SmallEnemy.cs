@@ -9,7 +9,8 @@ public class SmallEnemy : BaseEnemy
         Idle,
         Attack,
         Trace,
-        Dead
+        Dead,
+        Stun
     }
 
     public float speed = 5;
@@ -28,11 +29,13 @@ public class SmallEnemy : BaseEnemy
         spriteRenderer = GetComponent<SpriteRenderer>();
         AttackArea = transform.GetChild(0).GetComponent<BoxCollider2D>();
         player = Player.instance;
+
         StartCoroutine(TracePlayer());
     }
     protected override void Update()
     {
         base.Update();
+
         if (state == EEnemyState.Trace)
         {
             Move();
@@ -55,6 +58,11 @@ public class SmallEnemy : BaseEnemy
 
         while (state != EEnemyState.Dead)
         {
+            if (hitState == EHitState.Stun)
+            {
+                yield return null;
+                continue;
+            }
             state = Mathf.Abs(player.transform.position.x - transform.position.x) > 1 ? EEnemyState.Trace : EEnemyState.Attack;
 
             if (state == EEnemyState.Attack)
@@ -77,5 +85,12 @@ public class SmallEnemy : BaseEnemy
         {
             Player.instance.Hp -= attackValue;
         }
+    }
+    protected override void Hit(float damage)
+    {
+        base.Hit(damage);
+        state = EEnemyState.Stun;
+
+
     }
 }
