@@ -8,7 +8,7 @@ public enum EHitState
 {
     Normal,
     Stun,
-    Lagdoll
+    KnockDown
 }
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -22,7 +22,7 @@ public abstract class Entity : SerializedMonoBehaviour
         {
             value = Mathf.Clamp(value, 0, maxHp);
             if (value - hp <= 0) Hit(hp - value);
-            if (hitState != EHitState.Lagdoll && value == 0)
+            if (hitState != EHitState.KnockDown && value == 0)
             {
                 Die();
                 return;
@@ -41,8 +41,8 @@ public abstract class Entity : SerializedMonoBehaviour
     protected BoxCollider2D col;
     protected virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        col = gameObject.GetComponent<BoxCollider2D>();
     }
     protected abstract void Die();
     protected abstract void Hit(float value);

@@ -780,6 +780,7 @@ MonoBehaviour:
   maxStunValue: 1
   maxHp: 100
   hp: 100
+  stunTime: 0
 --- !u!50 &223261671
 Rigidbody2D:
   serializedVersion: 4
@@ -1324,6 +1325,7 @@ MonoBehaviour:
   maxStunValue: 1
   maxHp: 100
   hp: 100
+  stunTime: 0
 --- !u!50 &468636895
 Rigidbody2D:
   serializedVersion: 4
@@ -2955,8 +2957,10 @@ MonoBehaviour:
   maxStunValue: 1
   maxHp: 100
   hp: 100
+  stunTime: 0
   speed: 5
   state: 0
+  AttackArea: {fileID: 0}
 --- !u!50 &1231417001
 Rigidbody2D:
   serializedVersion: 4
@@ -3224,6 +3228,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
   m_ValidKeywords:
   - HOLOGRAM_ON
+  - ROUNDWAVEUV_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -3394,7 +3399,7 @@ Material:
     - _RectSize: 1
     - _RotateUvAmount: 0
     - _RoundWaveSpeed: 2
-    - _RoundWaveStrength: 0.7
+    - _RoundWaveStrength: 0.088
     - _ShadowAlpha: 0.5
     - _ShadowX: 0.1
     - _ShadowY: -0.05

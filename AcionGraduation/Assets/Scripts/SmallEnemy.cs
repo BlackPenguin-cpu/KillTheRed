@@ -21,7 +21,7 @@ public class SmallEnemy : BaseEnemy
     private SpriteRenderer spriteRenderer;
 
     [Tooltip("AttackCollider")]
-    BoxCollider2D AttackArea;
+    [SerializeField] private BoxCollider2D AttackArea;
     protected override void Start()
     {
         base.Start();
@@ -42,6 +42,7 @@ public class SmallEnemy : BaseEnemy
         }
 
         animator.SetInteger("State", (int)state);
+        animator.SetInteger("HitState", (int)hitState);
     }
     private void Move()
     {
@@ -58,8 +59,9 @@ public class SmallEnemy : BaseEnemy
 
         while (state != EEnemyState.Dead)
         {
-            if (hitState == EHitState.Stun)
+            if (hitState != EHitState.Normal)
             {
+                state = EEnemyState.Stun;
                 yield return null;
                 continue;
             }
@@ -89,8 +91,5 @@ public class SmallEnemy : BaseEnemy
     protected override void Hit(float damage)
     {
         base.Hit(damage);
-        state = EEnemyState.Stun;
-
-
     }
 }

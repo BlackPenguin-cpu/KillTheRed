@@ -6,36 +6,50 @@ using UnityEngine;
 
 public class BaseEnemy : Entity
 {
+    [SerializeField]
     protected float stunTime;
     protected float attackValue;
     protected int lookDir;
+    protected bool inviinvincibility;
+
+    public override float Hp
+    {
+        get => base.Hp;
+        set
+        {
+            if (inviinvincibility) return;
+            base.Hp = value;
+        }
+    }
     protected virtual void Update()
     {
-        StandUp();
-        if (hitState == EHitState.Stun)
+        if (hitState == EHitState.Stun && !isOnAir())
+        {
+            hitState = EHitState.KnockDown;
+            rb.mass = 2;
+        }
+        if (stunTime <= 1 && hitState == EHitState.KnockDown)
         {
             stunTime += Time.deltaTime;
             if (stunTime > 1)
             {
-                stunTime = 0;
-                hitState = EHitState.Normal;
+                StandUp();
             }
         }
     }
 
     protected virtual void StandUp()
     {
-        if (hitState == EHitState.Lagdoll && !isOnAir())
-        {
-            hitState = EHitState.Normal;
-            rb.gravityScale = 1;
-            rb.mass = 2f;
-        }
+        hitState = EHitState.Normal;
+        rb.gravityScale = 1;
+        stunTime = 0;
+
+        inviinvincibility = false;
     }
 
     protected override void Die()
     {
-        if (hitState == EHitState.Lagdoll)
+        if (hitState == EHitState.KnockDown)
             Destroy(gameObject);
     }
     protected override void Hit(float damage)
@@ -44,7 +58,7 @@ public class BaseEnemy : Entity
         {
             case EHitState.Normal:
                 stunValue += damage;
-                if (stunValue < maxStunValue)
+                if (stunValue >= maxStunValue)
                 {
                     stunValue = 0;
                     hitState = EHitState.Stun;
@@ -52,13 +66,8 @@ public class BaseEnemy : Entity
                 }
                 break;
             case EHitState.Stun:
-                if (!isOnAir())
-                    hitState = EHitState.Lagdoll;
-                else
-                    rb.gravityScale = 0.5f;
                 break;
-            case EHitState.Lagdoll:
-                stunTime = 0;
+            case EHitState.KnockDown:
                 break;
         }
 
