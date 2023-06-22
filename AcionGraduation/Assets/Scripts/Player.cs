@@ -71,9 +71,9 @@ public partial class Player : Entity
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    readonly private float staminaMaxValue = 3;
-    readonly private float staminaaRegenSec = 1;
-    private float staminaValue = 0;
+    readonly public float staminaMaxValue = 3;
+    readonly public float staminaaRegenSec = 1;
+    public float staminaValue = 0;
 
     private float dashCooldown = 1;
 

@@ -13,12 +13,12 @@ public class UIManager : MonoBehaviour
     public Image[] skillIcon;
     public Image[] weaponIcon;
     public Image[] staminaGauge;
-
     #region 무기아이콘을 위한 변수
     readonly Color semiInvisible = new Color(1, 1, 1, 0.4f);
     readonly Vector3 weaponIconStartPos = new Vector2(0, -17.5f);
     readonly Vector3 weaponIconEndPos = new Vector2(0, -22.5f);
     #endregion
+
     private Player player;
     public void Awake()
     {
@@ -32,9 +32,19 @@ public class UIManager : MonoBehaviour
     public void Update()
     {
         WeaponIconAnim();
+        BaseUIApply();
     }
 
-    public void WeaponIconAnim()
+    private void BaseUIApply()
+    {
+        hpBar.fillAmount = player.Hp / player.maxHp;
+        for (int i = 0; i < player.staminaMaxValue; i++)
+        {
+            staminaGauge[i].fillAmount = player.staminaValue - i;
+        }
+
+    }
+    private void WeaponIconAnim()
     {
         for (int i = 0; i < (int)EPlayerWeaponState.End; i++)
         {

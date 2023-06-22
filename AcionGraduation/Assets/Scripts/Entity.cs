@@ -34,7 +34,7 @@ public abstract class Entity : SerializedMonoBehaviour
     public float stunValue;
     public float maxStunValue;
     [SerializeField]
-    protected float maxHp;
+    public float maxHp;
     [SerializeField]
     protected float hp;
     protected Rigidbody2D rb;
