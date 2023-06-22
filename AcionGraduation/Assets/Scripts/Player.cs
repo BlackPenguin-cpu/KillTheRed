@@ -7,13 +7,15 @@ using DG.Tweening;
 using static UnityEditor.PlayerSettings;
 using UnityEditor.U2D;
 using System;
+using UnityEngine.UI;
 
 public enum EPlayerWeaponState
 {
     Hand,
     Sword,
     Pistol,
-    Hammer
+    Hammer,
+    End
 }
 public enum EPlayerState
 {
@@ -54,12 +56,9 @@ public partial class Player : Entity
 
     [SerializeField]
     private WeaponAttackAreaClass weaponAttackAreaClass;
-    [SerializeField]
-    private EPlayerState state;
-    [SerializeField]
-    private EPlayerAttackState attackState;
-    [SerializeField]
-    private EPlayerWeaponState playerWeaponState;
+    public EPlayerState state;
+    public EPlayerAttackState attackState;
+    public EPlayerWeaponState playerWeaponState;
 
     private int lookDir;
     [SerializeField]
@@ -71,6 +70,10 @@ public partial class Player : Entity
     private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+
+    readonly private float staminaMaxValue = 3;
+    readonly private float staminaaRegenSec = 1;
+    private float staminaValue = 0;
 
     private float dashCooldown = 1;
 
