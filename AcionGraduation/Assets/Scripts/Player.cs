@@ -49,6 +49,7 @@ public partial class Player : Entity
 
     public bool onAir;
     public float upperForcePower;
+    public float upperSelfForcePower;
 
     public float attackDamage;
 
@@ -100,6 +101,8 @@ public partial class Player : Entity
         animator.SetBool("OnAttack", onAttack);
         animator.SetBool("OnAir", onAir);
 
+        if (staminaValue <= staminaMaxValue)
+            staminaValue += Time.deltaTime * staminaaRegenSec;
         dashCooldown -= Time.deltaTime;
     }
     private void PlayerInput()
@@ -164,6 +167,8 @@ public partial class Player : Entity
         else
             return;
         float duration = 0.1f;
+        staminaValue -= 1;
+
 
         Vector3 pos = transform.position;
         StartCoroutine(cor());
@@ -229,7 +234,7 @@ public partial class Player : Entity
                 {
                     break;
                 }
-                rb.velocity = Vector3.up * 3;
+                rb.velocity = Vector3.up;
                 break;
         }
         var ray = AttackCollisionCheck(collider2D);
@@ -246,7 +251,7 @@ public partial class Player : Entity
         BoxCollider2D collider2D = null;
 
         if (attackState != EPlayerAttackState.Upper)
-            rb.AddForce(Vector2.right * Input.GetAxisRaw("Horizontal") * 2f, ForceMode2D.Impulse);
+            rb.AddForce(new Vector3(Input.GetAxisRaw("Horizontal") * 2f, 1f), ForceMode2D.Impulse);
 
         switch (attackState)
         {
@@ -262,7 +267,7 @@ public partial class Player : Entity
                 {
                     return;
                 }
-                rb.velocity = Vector3.up * 3;
+                rb.velocity = Vector3.up * 5;
                 break;
         }
         var ray = AttackCollisionCheck(collider2D);
@@ -276,10 +281,10 @@ public partial class Player : Entity
                     physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
                     break;
                 case EPlayerAttackState.Upper:
-                    physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * upperForcePower, ForceMode2D.Impulse);
+                    physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (upperForcePower / 2), ForceMode2D.Impulse);
                     break;
                 case EPlayerAttackState.OnAir:
-                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 3;
+                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 5;
                     break;
             }
         }
@@ -304,7 +309,7 @@ public partial class Player : Entity
     private void UpperCut()
     {
         attackState = EPlayerAttackState.Upper;
-        rb.AddForce(Vector2.up * upperForcePower, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * upperSelfForcePower, ForceMode2D.Impulse);
     }
     private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
     {
@@ -353,6 +358,6 @@ public partial class Player : Entity
 
     protected override void Hit(float value)
     {
-
+        Camera.main.DOShakePosition(0.3f, 2);
     }
 }

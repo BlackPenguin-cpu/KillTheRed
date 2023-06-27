@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SmallEnemy : BaseEnemy
@@ -85,7 +86,9 @@ public class SmallEnemy : BaseEnemy
     {
         if (AttackCollisionCheck(AttackArea))
         {
-            Player.instance.Hp -= attackValue;
+            player.Hp -= attackValue;
+            Vector3 pos = player.transform.position - transform.position;
+            player.GetComponent<Rigidbody2D>().AddForce(new Vector3(pos.x / Mathf.Abs(pos.x) * 2, 1), ForceMode2D.Impulse);
         }
     }
     protected override void Hit(float damage)
