@@ -8,6 +8,8 @@ using static UnityEditor.PlayerSettings;
 using UnityEditor.U2D;
 using System;
 using UnityEngine.UI;
+using System.Reflection;
+using Unity.VisualScripting;
 
 public enum EPlayerWeaponState
 {
@@ -68,6 +70,9 @@ public partial class Player : Entity
     private float spd;
     private bool onAttack;
 
+    private bool hammerCharging;
+    private bool hammerChargingComplete;
+
     private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -94,29 +99,37 @@ public partial class Player : Entity
     {
         Move();
         PlayerInput();
+        AnimatorApply();
+
+        if (staminaValue <= staminaMaxValue)
+            staminaValue += Time.deltaTime * staminaaRegenSec;
+        dashCooldown -= Time.deltaTime;
+    }
+    private void AnimatorApply()
+    {
         onAir = isOnAir();
         animator.SetInteger("State", (int)state);
         animator.SetInteger("AttackState", (int)attackState);
         animator.SetInteger("WeaponState", (int)playerWeaponState);
         animator.SetBool("OnAttack", onAttack);
         animator.SetBool("OnAir", onAir);
-
-        if (staminaValue <= staminaMaxValue)
-            staminaValue += Time.deltaTime * staminaaRegenSec;
-        dashCooldown -= Time.deltaTime;
+        animator.SetInteger("HammerCharging", hammerCharging ? (hammerChargingComplete ? 2 : 1) : 0);
     }
     private void PlayerInput()
     {
         if (Input.GetKeyDown(KeyCode.Z))
-        {
             Dash();
-        }
         if (Input.GetKeyDown(KeyCode.C))
-        {
             Jump();
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
+            if (playerWeaponState == EPlayerWeaponState.Hammer)
+            {
+                hammerCharging = true;
+                return;
+            }
+
+
             if (Input.GetKey(KeyCode.UpArrow) && state != EPlayerState.Attack)
                 UpperCut();
             if (onAir)
@@ -128,10 +141,20 @@ public partial class Player : Entity
                 StopCoroutine(attackCoroutine);
             attackCoroutine = StartCoroutine(AttackDelay());
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.X))
         {
-            WeaponChanage(EPlayerWeaponState.Sword);
+            if (hammerChargingComplete)
+                HammerKeyUp();
+            else
+                hammerCharging = false;
         }
+        if (Input.GetKeyDown(KeyCode.A))
+            WeaponChanage(EPlayerWeaponState.Sword);
+        else if (Input.GetKeyDown(KeyCode.S))
+            WeaponChanage(EPlayerWeaponState.Pistol);
+        else if (Input.GetKeyDown(KeyCode.D))
+            WeaponChanage(EPlayerWeaponState.Hammer);
+
     }
     private void Jump()
     {
@@ -188,10 +211,36 @@ public partial class Player : Entity
             state = EPlayerState.Idle;
         }
     }
+    private void HammerKeyUp()
+    {
+        hammerCharging = false;
+        hammerChargingComplete = false;
 
+        BoxCollider2D collider2D = null;
+        collider2D = weaponAttackAreaClass.weaponGroundAttack[EPlayerWeaponState.Hammer][0];
+        var ray = AttackCollisionCheck(collider2D);
+
+        foreach (Collider2D physics2D in ray)
+        {
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 4;
+            physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(upperForcePower, 5), ForceMode2D.Impulse);
+            if (ray != null)
+            {
+                StartCoroutine(timeDelay());
+                IEnumerator timeDelay()
+                {
+                    Time.timeScale = 0.1f;
+                    yield return new WaitForSecondsRealtime(0.2f);
+                    Time.timeScale = 1;
+                }
+            }
+        }
+    }
     private void ShadowInst(float duration, float startAlpha = 1)
     {
-        GameObject obj = Instantiate(new GameObject("Player_Shadow", typeof(SpriteRenderer)), transform.position, Quaternion.identity);
+        GameObject obj = new GameObject("Player_Shadow", typeof(SpriteRenderer));
+        obj.transform.position = transform.position;
+
         SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
         objRenderer.flipX = spriteRenderer.flipX;
         objRenderer.sprite = spriteRenderer.sprite;
@@ -200,10 +249,10 @@ public partial class Player : Entity
         StartCoroutine(corutine());
         IEnumerator corutine()
         {
-            while (alphaValue.a > 0)
+            while (alphaValue.a > 0.01f)
             {
                 objRenderer.color = alphaValue;
-                alphaValue.a -= Time.deltaTime / duration * startAlpha;
+                alphaValue.a -= Time.deltaTime / duration * alphaValue.a;
                 yield return null;
             }
             Destroy(obj.gameObject);
@@ -288,6 +337,16 @@ public partial class Player : Entity
                     break;
             }
         }
+        if (ray != null)
+        {
+            StartCoroutine(timeDelay());
+            IEnumerator timeDelay()
+            {
+                Time.timeScale = 0.1f;
+                yield return new WaitForSecondsRealtime(0.1f);
+                Time.timeScale = 1;
+            }
+        }
     }
     public void AttackEnd()
     {
@@ -316,6 +375,8 @@ public partial class Player : Entity
         int layerMask = 1 << LayerMask.NameToLayer("Enemy");
         return Physics2D.OverlapBoxAll(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
+
+    public void HammerChargeComplete() => hammerChargingComplete = true;
 
     #region PlayerSkillEffect
 
