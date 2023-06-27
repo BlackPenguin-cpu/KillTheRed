@@ -216,7 +216,7 @@ public partial class Player : Entity
         hammerCharging = false;
         hammerChargingComplete = false;
 
-
+        state = EPlayerState.Attack;
     }
     private void ShadowInst(float duration, float startAlpha = 1)
     {
@@ -322,7 +322,7 @@ public partial class Player : Entity
                     break;
             }
         }
-        if (ray != null)
+        if (ray.Length > 0)
         {
             StartCoroutine(timeDelay());
             IEnumerator timeDelay()
@@ -396,7 +396,6 @@ public partial class Player : Entity
         CameraManager.instance.Flash(0.1f);
     }
     #endregion
-
     #region Hammer
     private void HammerAttack()
     {
@@ -418,7 +417,9 @@ public partial class Player : Entity
                     Time.timeScale = 1;
                 }
             }
+            Camera.main.DOShakePosition(0.2f, 2);
         }
+        CameraManager.instance.Flash(0.2f);
     }
     #endregion
     #endregion
