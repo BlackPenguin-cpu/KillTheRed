@@ -178,7 +178,7 @@ public partial class Player : Entity
         {
             state = EPlayerState.Idle;
         }
-        var spdValue = hor * spd * Time.deltaTime;
+        var spdValue = hor * spd * Time.deltaTime * (hammerCharging ? 0.4f : 1);
 
         transform.position += Vector3.right * spdValue;
     }
@@ -216,25 +216,7 @@ public partial class Player : Entity
         hammerCharging = false;
         hammerChargingComplete = false;
 
-        BoxCollider2D collider2D = null;
-        collider2D = weaponAttackAreaClass.weaponGroundAttack[EPlayerWeaponState.Hammer][0];
-        var ray = AttackCollisionCheck(collider2D);
 
-        foreach (Collider2D physics2D in ray)
-        {
-            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 4;
-            physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(upperForcePower, 5), ForceMode2D.Impulse);
-            if (ray != null)
-            {
-                StartCoroutine(timeDelay());
-                IEnumerator timeDelay()
-                {
-                    Time.timeScale = 0.1f;
-                    yield return new WaitForSecondsRealtime(0.2f);
-                    Time.timeScale = 1;
-                }
-            }
-        }
     }
     private void ShadowInst(float duration, float startAlpha = 1)
     {
@@ -264,6 +246,9 @@ public partial class Player : Entity
             playerWeaponState = EPlayerWeaponState.Hand;
         else
             playerWeaponState = weaponState;
+
+        hammerCharging = false;
+        hammerChargingComplete = false;
     }
     private void BigAttack(int index)
     {
@@ -409,6 +394,31 @@ public partial class Player : Entity
 
         Camera.main.DOShakePosition(0.2f, 2);
         CameraManager.instance.Flash(0.1f);
+    }
+    #endregion
+
+    #region Hammer
+    private void HammerAttack()
+    {
+        BoxCollider2D collider2D = null;
+        collider2D = weaponAttackAreaClass.weaponGroundAttack[EPlayerWeaponState.Hammer][0];
+        var ray = AttackCollisionCheck(collider2D);
+
+        foreach (Collider2D physics2D in ray)
+        {
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 4;
+            physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(lookDir * 4, 15), ForceMode2D.Impulse);
+            if (ray != null)
+            {
+                StartCoroutine(timeDelay());
+                IEnumerator timeDelay()
+                {
+                    Time.timeScale = 0.1f;
+                    yield return new WaitForSecondsRealtime(0.2f);
+                    Time.timeScale = 1;
+                }
+            }
+        }
     }
     #endregion
     #endregion
