@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac0c24d450b76e744b8c8dd42bd728dc
+guid: b37c841b2293e254aa7e8ab99401e48b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,106 +105,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pl_Anim_Gun_Attack_01_0
+      name: Pl_Anim_Gun_AttackEffect_01_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 140
-        height: 160
+        width: 115
+        height: 155
       alignment: 9
-      pivot: {x: 0.4, y: 0.08}
+      pivot: {x: 0.78, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be6330c3cb726cc49a2e016309994504
-      internalID: -723859818
+      spriteID: 989ef5add07a459419bfbb7e6fa1bddf
+      internalID: 1170798979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Gun_Attack_01_1
+      name: Pl_Anim_Gun_AttackEffect_01_1
       rect:
         serializedVersion: 2
-        x: 140
+        x: 115
         y: 0
-        width: 140
-        height: 160
+        width: 115
+        height: 155
       alignment: 9
-      pivot: {x: 0.4, y: 0.08}
+      pivot: {x: 0.78, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 090da169a46eada4796ad9fb37e4537c
-      internalID: 1605107442
+      spriteID: 8af4553c2da2712449eacf79c34369a4
+      internalID: -1195503758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Gun_Attack_01_2
+      name: Pl_Anim_Gun_AttackEffect_01_2
       rect:
         serializedVersion: 2
-        x: 280
+        x: 230
         y: 0
-        width: 140
-        height: 160
+        width: 115
+        height: 155
       alignment: 9
-      pivot: {x: 0.4, y: 0.08}
+      pivot: {x: 0.78, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc96986623a3a124e8fba3518d3dcf24
-      internalID: 1597393075
+      spriteID: 0c495e6c5301af04e9670a6624a47ac2
+      internalID: -527078303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pl_Anim_Gun_Attack_01_3
+      name: Pl_Anim_Gun_AttackEffect_01_3
       rect:
         serializedVersion: 2
-        x: 420
+        x: 345
         y: 0
-        width: 140
-        height: 160
+        width: 115
+        height: 155
       alignment: 9
-      pivot: {x: 0.4, y: 0.08}
+      pivot: {x: 0.78, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eda411e0c16622f48910611a11d43eee
-      internalID: -54812525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pl_Anim_Gun_Attack_01_4
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 0
-        width: 140
-        height: 160
-      alignment: 9
-      pivot: {x: 0.4, y: 0.08}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d7ef4bbd030d91429c1befea20df981
-      internalID: 1902099781
+      spriteID: 836d2f9f0a2cd424387a4909560c18ef
+      internalID: -739425478
       vertices: []
       indices: 
       edges: []
@@ -212,7 +191,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2a3bbe11f391a6a4cbf12c4156d1e9b9
+    spriteID: 1140460901de48a4397e2f61222deab2
     internalID: 0
     vertices: []
     indices: 
@@ -220,11 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Pl_Anim_Gun_Attack_01_0: -723859818
-      Pl_Anim_Gun_Attack_01_1: 1605107442
-      Pl_Anim_Gun_Attack_01_2: 1597393075
-      Pl_Anim_Gun_Attack_01_3: -54812525
-      Pl_Anim_Gun_Attack_01_4: 1902099781
+      Pl_Anim_Gun_AttackEffect_01_0: 1170798979
+      Pl_Anim_Gun_AttackEffect_01_1: -1195503758
+      Pl_Anim_Gun_AttackEffect_01_2: -527078303
+      Pl_Anim_Gun_AttackEffect_01_3: -739425478
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

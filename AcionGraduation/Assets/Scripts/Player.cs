@@ -123,10 +123,12 @@ public partial class Player : Entity
             Jump();
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (playerWeaponState == EPlayerWeaponState.Hammer && !onAir)
+            if (playerWeaponState == EPlayerWeaponState.Hammer)
             {
-                hammerCharging = true;
-                return;
+                if (state == EPlayerState.Idle && !onAir)
+                    hammerCharging = true;
+                else if (!onAir)
+                    return;
             }
 
 
@@ -417,8 +419,21 @@ public partial class Player : Entity
                     Time.timeScale = 1;
                 }
             }
-            Camera.main.DOShakePosition(0.2f, 2);
         }
+        Camera.main.DOShakePosition(0.2f, 2);
+        CameraManager.instance.Flash(0.2f);
+    }
+    private void HammerDownAttack()
+    {
+        var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hammer][1]);
+        foreach (Collider2D obj in objs)
+        {
+            obj.GetComponent<Entity>().Hp -= attackDamage;
+            obj.GetComponent<Rigidbody2D>().AddForce(new Vector3(14 * lookDir, -10), ForceMode2D.Impulse);
+        }
+        rb.velocity = Vector3.up * 5;
+
+        Camera.main.DOShakePosition(0.2f, 2);
         CameraManager.instance.Flash(0.2f);
     }
     #endregion
