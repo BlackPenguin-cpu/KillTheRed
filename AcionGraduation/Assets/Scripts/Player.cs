@@ -123,7 +123,7 @@ public partial class Player : Entity
             Jump();
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (playerWeaponState == EPlayerWeaponState.Hammer)
+            if (playerWeaponState == EPlayerWeaponState.Hammer && !onAir)
             {
                 hammerCharging = true;
                 return;
