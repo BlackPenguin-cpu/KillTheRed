@@ -729,6 +729,40 @@ MonoBehaviour:
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!1 &260920256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260920257}
+  m_Layer: 0
+  m_Name: GunCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260920257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260920256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1941569339}
+  - {fileID: 1512490629}
+  - {fileID: 584831592}
+  m_Father: {fileID: 2052150854}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276459999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1167,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330030781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.75, y: -4.58, z: 0}
   m_LocalScale: {x: 211.56, y: 0.4335, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1534,6 +1568,64 @@ Transform:
   m_Father: {fileID: 1679882029}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &571565294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571565295}
+  - component: {fileID: 571565296}
+  m_Layer: 0
+  m_Name: baseAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &571565295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571565294}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 584831592}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &571565296
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571565294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.36161852, y: 0.038423}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5400763, y: 1.3619839}
+  m_EdgeRadius: 0
 --- !u!1 &580939390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,6 +1684,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3027067, y: 1.4914885}
   m_EdgeRadius: 0
+--- !u!1 &584831591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584831592}
+  m_Layer: 0
+  m_Name: AirAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584831592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584831591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 571565295}
+  - {fileID: 1140474751}
+  m_Father: {fileID: 260920257}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585410935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,6 +2805,64 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1157508, y: 2.1333702}
   m_EdgeRadius: 0
+--- !u!1 &1140474750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140474751}
+  - component: {fileID: 1140474752}
+  m_Layer: 0
+  m_Name: baseAttack (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1140474751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140474750}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 584831592}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1140474752
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140474750}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.8300917, y: 0.4971277}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.0154815, y: 3.1193147}
+  m_EdgeRadius: 0
 --- !u!1 &1144890533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,6 +3407,64 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.5084188, y: 1.5900584}
+  m_EdgeRadius: 0
+--- !u!1 &1263967523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1263967524}
+  - component: {fileID: 1263967525}
+  m_Layer: 0
+  m_Name: baseAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1263967524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263967523}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1512490629}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1263967525
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263967523}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.2428691, y: 1.3251612}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.208568, y: 2.719586}
   m_EdgeRadius: 0
 --- !u!1 &1268503774
 GameObject:
@@ -8587,6 +8828,38 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1512490628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512490629}
+  m_Layer: 0
+  m_Name: GroundAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1512490629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512490628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1263967524}
+  m_Father: {fileID: 260920257}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1595980396
 GameObject:
   m_ObjectHideFlags: 0
@@ -8692,6 +8965,7 @@ MonoBehaviour:
     - {fileID: 2049979658}
     - {fileID: 2107147487}
     - {fileID: 325592467}
+    - {fileID: 1263967525}
     - {fileID: 1823213739}
     - {fileID: 1463876012}
     - {fileID: 1059431123}
@@ -8734,7 +9008,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -8826,6 +9100,30 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 6|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -8833,11 +9131,11 @@ MonoBehaviour:
       Data: 
     - Name: weaponOnAirAttackArea
       Entry: 7
-      Data: 6|System.Collections.Generic.Dictionary`2[[EPlayerWeaponState, Assembly-CSharp],[UnityEngine.BoxCollider2D[],
+      Data: 7|System.Collections.Generic.Dictionary`2[[EPlayerWeaponState, Assembly-CSharp],[UnityEngine.BoxCollider2D[],
         UnityEngine.Physics2DModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 7|System.Collections.Generic.EnumEqualityComparer`1[[EPlayerWeaponState,
+      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[EPlayerWeaponState,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -8859,13 +9157,10 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: 8|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
+      Data: 9|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
     - Name: 
       Entry: 12
       Data: 4
-    - Name: 
-      Entry: 10
-      Data: 9
     - Name: 
       Entry: 10
       Data: 10
@@ -8875,6 +9170,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 12
+    - Name: 
+      Entry: 10
+      Data: 13
     - Name: 
       Entry: 13
       Data: 
@@ -8892,13 +9190,10 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 9|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
+      Data: 10|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
     - Name: 
       Entry: 12
       Data: 4
-    - Name: 
-      Entry: 10
-      Data: 13
     - Name: 
       Entry: 10
       Data: 14
@@ -8908,6 +9203,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 16
+    - Name: 
+      Entry: 10
+      Data: 17
     - Name: 
       Entry: 13
       Data: 
@@ -8925,16 +9223,16 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 10|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
+      Data: 11|UnityEngine.BoxCollider2D[], UnityEngine.Physics2DModule
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 10
-      Data: 17
+      Data: 18
     - Name: 
       Entry: 10
-      Data: 18
+      Data: 19
     - Name: 
       Entry: 13
       Data: 
@@ -8952,11 +9250,11 @@ MonoBehaviour:
       Data: 
     - Name: weaponUpperCutArea
       Entry: 7
-      Data: 11|System.Collections.Generic.Dictionary`2[[EPlayerWeaponState, Assembly-CSharp],[UnityEngine.BoxCollider2D,
+      Data: 12|System.Collections.Generic.Dictionary`2[[EPlayerWeaponState, Assembly-CSharp],[UnityEngine.BoxCollider2D,
         UnityEngine.Physics2DModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 12|System.Collections.Generic.EnumEqualityComparer`1[[EPlayerWeaponState,
+      Data: 13|System.Collections.Generic.EnumEqualityComparer`1[[EPlayerWeaponState,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -8978,7 +9276,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 10
-      Data: 19
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -8990,7 +9288,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 20
+      Data: 21
     - Name: 
       Entry: 8
       Data: 
@@ -9018,6 +9316,8 @@ MonoBehaviour:
   upperForcePower: 21
   upperSelfForcePower: 11
   attackDamage: 1
+  gunLaser: {fileID: 4128236955968353189, guid: c3a4c3198360aa148a83b5ac2c08f515, type: 3}
+  gunSpark: {fileID: 0}
   state: 0
   attackState: 0
   playerWeaponState: 0
@@ -9742,6 +10042,64 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7670088, y: 2.3438284}
   m_EdgeRadius: 0
+--- !u!1 &1941569338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1941569339}
+  - component: {fileID: 1941569340}
+  m_Layer: 0
+  m_Name: UpperCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1941569339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941569338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 260920257}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1941569340
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941569338}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.85295653, y: 0.5955517}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.4770179, y: 1.5599561}
+  m_EdgeRadius: 0
 --- !u!1 &1944656711
 GameObject:
   m_ObjectHideFlags: 0
@@ -9965,6 +10323,7 @@ Transform:
   - {fileID: 656822083}
   - {fileID: 804997030}
   - {fileID: 2136117090}
+  - {fileID: 260920257}
   m_Father: {fileID: 1673027574}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

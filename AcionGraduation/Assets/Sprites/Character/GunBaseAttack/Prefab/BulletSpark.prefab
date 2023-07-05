@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8441431346972481444}
   - component: {fileID: 6063855228138253236}
   - component: {fileID: 1154305404581123701}
+  - component: {fileID: 1821705374791639607}
   m_Layer: 0
   m_Name: BulletSpark
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1821705374791639607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780470287680212844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3c93e0c59565e4fbbea2404a1d49a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

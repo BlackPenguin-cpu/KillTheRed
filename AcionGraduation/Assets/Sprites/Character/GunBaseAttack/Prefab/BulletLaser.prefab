@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9205904777498701188}
   - component: {fileID: 2939754423657675445}
   - component: {fileID: 6107693312146208804}
+  - component: {fileID: 3094291982710861254}
   m_Layer: 0
   m_Name: BulletLaser
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3094291982710861254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128236955968353189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3c93e0c59565e4fbbea2404a1d49a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

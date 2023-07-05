@@ -4,12 +4,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using DG.Tweening;
-using static UnityEditor.PlayerSettings;
-using UnityEditor.U2D;
 using System;
-using UnityEngine.UI;
-using System.Reflection;
-using Unity.VisualScripting;
+using Sirenix.OdinInspector.Editor.Validation;
 
 public enum EPlayerWeaponState
 {
@@ -59,6 +55,10 @@ public partial class Player : Entity
 
     [SerializeField]
     private WeaponAttackAreaClass weaponAttackAreaClass;
+    [SerializeField]
+    private GameObject gunLaser;
+    [SerializeField]
+    private GameObject gunSpark;
     public EPlayerState state;
     public EPlayerAttackState attackState;
     public EPlayerWeaponState playerWeaponState;
@@ -215,9 +215,6 @@ public partial class Player : Entity
     }
     private void HammerKeyUp()
     {
-        hammerCharging = false;
-        hammerChargingComplete = false;
-
         state = EPlayerState.Attack;
     }
     private void ShadowInst(float duration, float startAlpha = 1)
@@ -307,23 +304,6 @@ public partial class Player : Entity
                 break;
         }
         var ray = AttackCollisionCheck(collider2D);
-        foreach (Collider2D physics2D in ray)
-        {
-            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
-
-            switch (attackState)
-            {
-                case EPlayerAttackState.None:
-                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
-                    break;
-                case EPlayerAttackState.Upper:
-                    physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (upperForcePower / 2), ForceMode2D.Impulse);
-                    break;
-                case EPlayerAttackState.OnAir:
-                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 5;
-                    break;
-            }
-        }
         if (ray.Length > 0)
         {
             StartCoroutine(timeDelay());
@@ -332,6 +312,29 @@ public partial class Player : Entity
                 Time.timeScale = 0.1f;
                 yield return new WaitForSecondsRealtime(0.1f);
                 Time.timeScale = 1;
+            }
+        }
+
+        foreach (Collider2D physics2D in ray)
+        {
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
+
+            switch (attackState)
+            {
+                case EPlayerAttackState.None:
+                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
+                    if (playerWeaponState == EPlayerWeaponState.Pistol)
+                    {
+                        Instantiate(gunLaser, UnityEngine.Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
+                        return;
+                    }
+                    break;
+                case EPlayerAttackState.Upper:
+                    physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (upperForcePower / 2), ForceMode2D.Impulse);
+                    break;
+                case EPlayerAttackState.OnAir:
+                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 5;
+                    break;
             }
         }
     }
@@ -348,8 +351,9 @@ public partial class Player : Entity
     private IEnumerator AttackDelay()
     {
         yield return null;
+        float duration = animator.runtimeAnimatorController.animationClips[0].length;
         onAttack = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration);
         AttackEnd();
     }
     private void UpperCut()
@@ -366,7 +370,6 @@ public partial class Player : Entity
     public void HammerChargeComplete() => hammerChargingComplete = true;
 
     #region PlayerSkillEffect
-
     #region Hand
     private void HandAirAttackAxeKick()
     {
@@ -401,6 +404,9 @@ public partial class Player : Entity
     #region Hammer
     private void HammerAttack()
     {
+        hammerCharging = false;
+        hammerChargingComplete = false;
+
         BoxCollider2D collider2D = null;
         collider2D = weaponAttackAreaClass.weaponGroundAttack[EPlayerWeaponState.Hammer][0];
         var ray = AttackCollisionCheck(collider2D);
