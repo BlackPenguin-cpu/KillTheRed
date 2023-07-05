@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimatorDestory : MonoBehaviour
@@ -8,11 +6,12 @@ public class AnimatorDestory : MonoBehaviour
     private float maxDuration = 0;
     private Animator animator;
 
+    [SerializeField]
+    private bool isActive;
     void Start()
     {
         animator = GetComponent<Animator>();
         maxDuration = animator.runtimeAnimatorController.animationClips[0].length;
-
     }
 
     void Update()
@@ -20,7 +19,11 @@ public class AnimatorDestory : MonoBehaviour
         duration += Time.deltaTime;
         if (duration > maxDuration)
         {
-            Destroy(gameObject);
+            duration = 0;
+            if (isActive)
+                gameObject.SetActive(false);
+            else
+                Destroy(gameObject);
         }
 
     }

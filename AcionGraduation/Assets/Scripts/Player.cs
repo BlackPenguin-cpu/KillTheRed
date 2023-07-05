@@ -59,6 +59,8 @@ public partial class Player : Entity
     private GameObject gunLaser;
     [SerializeField]
     private GameObject gunSpark;
+    [SerializeField]
+    private GameObject gunAirspin;
     public EPlayerState state;
     public EPlayerAttackState attackState;
     public EPlayerWeaponState playerWeaponState;
@@ -334,6 +336,13 @@ public partial class Player : Entity
                     break;
                 case EPlayerAttackState.OnAir:
                     physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 5;
+                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
+                    if (playerWeaponState == EPlayerWeaponState.Pistol)
+                    {
+                        Instantiate(gunLaser, UnityEngine.Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
+                        physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 2;
+                        return;
+                    }
                     break;
             }
         }
@@ -442,6 +451,50 @@ public partial class Player : Entity
         Camera.main.DOShakePosition(0.2f, 2);
         CameraManager.instance.Flash(0.2f);
     }
+    #endregion
+    #region Gun
+    private void GunLastShot()
+    {
+        Vector2 pos = gunSpark.transform.localPosition;
+        gunSpark.transform.localPosition = new Vector2(MathF.Abs(pos.x) * lookDir, pos.y);
+
+        gunSpark.SetActive(true);
+    }
+    private void GunAirRoll(float index)
+    {
+        Vector2 pos = transform.position;
+        float duration = 0;
+
+        gunAirspin.SetActive(true);
+
+        StartCoroutine(Rolling());
+
+        IEnumerator Rolling()
+        {
+            while (duration < 0.5f)
+            {
+                yield return null;
+                transform.position = new Vector3(pos.x + lookDir * index, pos.y);
+                index += (index > 0 ? 1 : -1) * Time.deltaTime * 5;
+                duration += Time.deltaTime;
+            }
+            gunAirspin.SetActive(false);
+        }
+    }
+    #endregion
+    #region Skill
+
+    private void ShotGun()
+    {
+        animator.SetTrigger("ShotGun");
+
+        state = EPlayerState.Idle;
+        attackState = EPlayerAttackState.None;
+        hammerCharging = false;
+        hammerChargingComplete = false;
+        onAttack = false;
+    }
+
     #endregion
     #endregion
     protected override void Die()
