@@ -20,6 +20,8 @@ public class SmallEnemy : BaseEnemy
     private Player player;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private ParticleSystem HitParticle;
 
     [Tooltip("AttackCollider")]
     [SerializeField] private BoxCollider2D AttackArea;
@@ -94,5 +96,6 @@ public class SmallEnemy : BaseEnemy
     protected override void Hit(float damage)
     {
         base.Hit(damage);
+        HitParticle.Play();
     }
 }
