@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ac7f21be1caa9d44bfb4d9e2e1ac38d
+guid: 83ffb9dffe17ffe41a827197fe299f95
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,12 +33,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,169 +105,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sp_at-Sheet_0
+      name: DualPistol_Uper2 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 280
-        height: 230
+        width: 95
+        height: 165
       alignment: 9
-      pivot: {x: 0.53, y: 0.06}
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa9e22bc9bb27b545b229277f0a984de
-      internalID: 1795151981
+      spriteID: 218a43f3564a39148ac229058a53aabf
+      internalID: 968105031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sp_at-Sheet_1
+      name: DualPistol_Uper2 1_1
       rect:
         serializedVersion: 2
-        x: 280
+        x: 95
         y: 0
-        width: 280
-        height: 230
+        width: 95
+        height: 165
       alignment: 9
-      pivot: {x: 0.53, y: 0.06}
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac5b6ff67393af94e9e5dc24efce7c3d
-      internalID: -1219915683
+      spriteID: ce753e0380e73cd43a8b03f07d96d690
+      internalID: -1775850164
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sp_at-Sheet_2
+      name: DualPistol_Uper2 1_2
       rect:
         serializedVersion: 2
-        x: 560
+        x: 190
         y: 0
-        width: 280
-        height: 230
+        width: 95
+        height: 165
       alignment: 9
-      pivot: {x: 0.53, y: 0.06}
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ecddf2d1bc5a9e43bfc0b6cfd4c0465
-      internalID: 1482292642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sp_at-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 840
-        y: 0
-        width: 280
-        height: 230
-      alignment: 9
-      pivot: {x: 0.53, y: 0.06}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f324cb300f77a8a4d970bc851a630e09
-      internalID: -299661421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sp_at-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 0
-        width: 280
-        height: 230
-      alignment: 9
-      pivot: {x: 0.53, y: 0.06}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9829ee44dc893af428fe87a020b16243
-      internalID: 1992195344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sp_at-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 0
-        width: 280
-        height: 230
-      alignment: 9
-      pivot: {x: 0.53, y: 0.06}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23861891a1d8f704082abda804f3545b
-      internalID: 1385483472
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sp_at-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 280
-        height: 230
-      alignment: 9
-      pivot: {x: 0.53, y: 0.06}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0e9aab43d37b944487072bb07ac2f60
-      internalID: -1682150194
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sp_at-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 1960
-        y: 0
-        width: 280
-        height: 230
-      alignment: 9
-      pivot: {x: 0.53, y: 0.06}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 892552eccf0ae5144a7adf0825ff1c70
-      internalID: 1096983746
+      spriteID: 4a3d49b4323c1654cae417938a6fec69
+      internalID: 1479975635
       vertices: []
       indices: 
       edges: []
@@ -275,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 83872f9b9a2ca4143a77a5e1c7c075e5
     internalID: 0
     vertices: []
     indices: 
@@ -283,14 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sp_at-Sheet_0: 1795151981
-      sp_at-Sheet_1: -1219915683
-      sp_at-Sheet_2: 1482292642
-      sp_at-Sheet_3: -299661421
-      sp_at-Sheet_4: 1992195344
-      sp_at-Sheet_5: 1385483472
-      sp_at-Sheet_6: -1682150194
-      sp_at-Sheet_7: 1096983746
+      DualPistol_Uper2 1_0: 968105031
+      DualPistol_Uper2 1_1: -1775850164
+      DualPistol_Uper2 1_2: 1479975635
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

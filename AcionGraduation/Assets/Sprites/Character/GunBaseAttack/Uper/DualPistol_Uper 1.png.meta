@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 10fa9522f0fcc964198cebee7ff6eb64
+guid: fe629b9bb5e09844384cd0ccea5c2947
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -105,295 +105,295 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DualPistol_Uper_0
+      name: DualPistol_Uper 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50681fb21fade9e4b894f9540b2aecb8
-      internalID: 1744427919
+      spriteID: 67a94efe73f237946aaf1ee76a4433d5
+      internalID: 1941176785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_1
+      name: DualPistol_Uper 1_1
       rect:
         serializedVersion: 2
         x: 310
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 749bed77cd40beb4e909d44bba0ec9b3
-      internalID: 858270314
+      spriteID: 43d8e7458ea6a7243b240a5b5a88653f
+      internalID: 1058048646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_2
+      name: DualPistol_Uper 1_2
       rect:
         serializedVersion: 2
         x: 930
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3372838485688ae4287ba97947fed371
-      internalID: -1138163207
+      spriteID: 36d3aeaa118cd1b4b9f74f30f38e78de
+      internalID: -942620418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_3
+      name: DualPistol_Uper 1_3
       rect:
         serializedVersion: 2
         x: 1240
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 557d5a2a53f3eae44923018cf9741d44
-      internalID: 1041734559
+      spriteID: 5f0b1d0c53e90804d93b4c28655f06c1
+      internalID: 869821571
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_4
+      name: DualPistol_Uper 1_4
       rect:
         serializedVersion: 2
         x: 1550
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9dd41e72dc0cd5439ebe4f44cd8c5b6
-      internalID: 1908688245
+      spriteID: dd7ac8d16e629744a8eff6eabf341605
+      internalID: 1947792254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_5
+      name: DualPistol_Uper 1_5
       rect:
         serializedVersion: 2
         x: 1860
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b06507262a232a4bbfa286ee9e72562
-      internalID: 774905127
+      spriteID: cba0ede1670558d418b1321e205a803d
+      internalID: -471869675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_6
+      name: DualPistol_Uper 1_6
       rect:
         serializedVersion: 2
         x: 2170
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb66ef8918030334f9f3b57e22773189
-      internalID: 1766585270
+      spriteID: 4b7a1c57cd9330440a11076e80c453df
+      internalID: 1439903952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_7
+      name: DualPistol_Uper 1_7
       rect:
         serializedVersion: 2
         x: 2480
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48362bd64a4509f46a712a41cca6ab10
-      internalID: -1471930318
+      spriteID: 5f841cc76e1d2744eb32060193a39eb9
+      internalID: 301542568
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_8
+      name: DualPistol_Uper 1_8
       rect:
         serializedVersion: 2
         x: 2790
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 513d4c0521796b9458e88badaf20f21c
-      internalID: 735624896
+      spriteID: 14075c6edf3b77f48a4071b5c62e576b
+      internalID: -996673132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_9
+      name: DualPistol_Uper 1_9
       rect:
         serializedVersion: 2
         x: 3100
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f24a27581b52f394b8b889fbc83a8666
-      internalID: -1290453215
+      spriteID: 3d7096b3a20efbb43b3b676983536ccf
+      internalID: 899421946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_10
+      name: DualPistol_Uper 1_10
       rect:
         serializedVersion: 2
         x: 3410
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f7ceeaa195d48647a28edd1227f08fa
-      internalID: -483036256
+      spriteID: 6f93d11a483c99e498711bf483bcfd93
+      internalID: 2094177607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_11
+      name: DualPistol_Uper 1_11
       rect:
         serializedVersion: 2
         x: 3720
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31920a52fa30f894f86554064cf27861
-      internalID: -1440407985
+      spriteID: e9d8ab7717ebc0640a8389d92365f18d
+      internalID: -414223203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_12
+      name: DualPistol_Uper 1_12
       rect:
         serializedVersion: 2
         x: 4030
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd7a073a96a1eb94ba835595cc3474dc
-      internalID: -1390746295
+      spriteID: 3a584fb913ef9fd48a1e3893d0b32b38
+      internalID: -1595852845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DualPistol_Uper_13
+      name: DualPistol_Uper 1_13
       rect:
         serializedVersion: 2
         x: 4340
         y: 0
         width: 310
-        height: 510
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 535
+      alignment: 9
+      pivot: {x: 0.54, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 694e7402d35fc3b4c8fd7f9f5b3a0e0c
-      internalID: -465573382
+      spriteID: d6b7ead1866212d499eeadddf279bb0b
+      internalID: 303031115
       vertices: []
       indices: 
       edges: []
@@ -401,7 +401,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 7785a2c38a81d524082efa6a6f3d9320
     internalID: 0
     vertices: []
     indices: 
@@ -409,20 +409,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DualPistol_Uper_0: 1744427919
-      DualPistol_Uper_1: 858270314
-      DualPistol_Uper_10: -483036256
-      DualPistol_Uper_11: -1440407985
-      DualPistol_Uper_12: -1390746295
-      DualPistol_Uper_13: -465573382
-      DualPistol_Uper_2: -1138163207
-      DualPistol_Uper_3: 1041734559
-      DualPistol_Uper_4: 1908688245
-      DualPistol_Uper_5: 774905127
-      DualPistol_Uper_6: 1766585270
-      DualPistol_Uper_7: -1471930318
-      DualPistol_Uper_8: 735624896
-      DualPistol_Uper_9: -1290453215
+      DualPistol_Uper 1_0: 1941176785
+      DualPistol_Uper 1_1: 1058048646
+      DualPistol_Uper 1_10: 2094177607
+      DualPistol_Uper 1_11: -414223203
+      DualPistol_Uper 1_12: -1595852845
+      DualPistol_Uper 1_13: 303031115
+      DualPistol_Uper 1_2: -942620418
+      DualPistol_Uper 1_3: 869821571
+      DualPistol_Uper 1_4: 1947792254
+      DualPistol_Uper 1_5: -471869675
+      DualPistol_Uper 1_6: 1439903952
+      DualPistol_Uper 1_7: 301542568
+      DualPistol_Uper 1_8: -996673132
+      DualPistol_Uper 1_9: 899421946
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

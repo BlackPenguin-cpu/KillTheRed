@@ -6,6 +6,8 @@ using Sirenix.Serialization;
 using DG.Tweening;
 using System;
 using Sirenix.OdinInspector.Editor.Validation;
+using JetBrains.Annotations;
+using System.Reflection;
 
 public enum EPlayerWeaponState
 {
@@ -22,13 +24,20 @@ public enum EPlayerState
     Jump,
     Attack,
     Dead,
-    Dash
+    Dash,
+    Skill
 }
 public enum EPlayerAttackState
 {
     None,
     Upper,
     OnAir
+}
+public enum EPlayerSkillState
+{
+    NONE,
+    Shotgun,
+    Spear
 }
 public partial class Player : Entity
 {
@@ -41,6 +50,8 @@ public partial class Player : Entity
         public Dictionary<EPlayerWeaponState, BoxCollider2D[]> weaponOnAirAttackArea;
         [DictionaryDrawerSettings]
         public Dictionary<EPlayerWeaponState, BoxCollider2D> weaponUpperCutArea;
+        [DictionaryDrawerSettings]
+        public Dictionary<EPlayerSkillState, BoxCollider2D> skillAttackArea;
     }
 
     public Coroutine attackCoroutine;
@@ -61,9 +72,15 @@ public partial class Player : Entity
     private GameObject gunSpark;
     [SerializeField]
     private GameObject gunAirspin;
+    [SerializeField]
+    private GameObject gunGranade;
+    [SerializeField]
+    private Transform gunGranadePos;
+
     public EPlayerState state;
     public EPlayerAttackState attackState;
     public EPlayerWeaponState playerWeaponState;
+    public EPlayerSkillState playerSkillState;
 
     private int lookDir;
     [SerializeField]
@@ -103,6 +120,9 @@ public partial class Player : Entity
         PlayerInput();
         AnimatorApply();
 
+        if (state != EPlayerState.Skill)
+            playerSkillState = EPlayerSkillState.NONE;
+
         if (staminaValue <= staminaMaxValue)
             staminaValue += Time.deltaTime * staminaaRegenSec;
         dashCooldown -= Time.deltaTime;
@@ -113,9 +133,10 @@ public partial class Player : Entity
         animator.SetInteger("State", (int)state);
         animator.SetInteger("AttackState", (int)attackState);
         animator.SetInteger("WeaponState", (int)playerWeaponState);
+        animator.SetInteger("SkillState", (int)playerSkillState);
+        animator.SetInteger("HammerCharging", hammerCharging ? (hammerChargingComplete ? 2 : 1) : 0);
         animator.SetBool("OnAttack", onAttack);
         animator.SetBool("OnAir", onAir);
-        animator.SetInteger("HammerCharging", hammerCharging ? (hammerChargingComplete ? 2 : 1) : 0);
     }
     private void PlayerInput()
     {
@@ -152,11 +173,18 @@ public partial class Player : Entity
             else
                 hammerCharging = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            ShotGun();
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+            Spear();
         if (Input.GetKeyDown(KeyCode.A))
-            WeaponChanage(EPlayerWeaponState.Sword);
+            WeaponChanage(EPlayerWeaponState.Hand);
         else if (Input.GetKeyDown(KeyCode.S))
-            WeaponChanage(EPlayerWeaponState.Pistol);
+            WeaponChanage(EPlayerWeaponState.Sword);
         else if (Input.GetKeyDown(KeyCode.D))
+            WeaponChanage(EPlayerWeaponState.Pistol);
+        else if (Input.GetKeyDown(KeyCode.F))
             WeaponChanage(EPlayerWeaponState.Hammer);
 
     }
@@ -178,7 +206,7 @@ public partial class Player : Entity
             if (!onAir && rb.velocity.y == 0)
                 state = EPlayerState.Run;
         }
-        else if (state != EPlayerState.Attack && rb.velocity == Vector2.zero)
+        else if (state != EPlayerState.Attack && state != EPlayerState.Skill && rb.velocity == Vector2.zero)
         {
             state = EPlayerState.Idle;
         }
@@ -188,7 +216,7 @@ public partial class Player : Entity
     }
     private void Dash()
     {
-        if (state == EPlayerState.Attack) return;
+        if (state == EPlayerState.Attack || staminaValue < 1) return;
         if (dashCooldown < 0)
             dashCooldown = 1;
         else
@@ -227,7 +255,7 @@ public partial class Player : Entity
         SpriteRenderer objRenderer = obj.GetComponent<SpriteRenderer>();
         objRenderer.flipX = spriteRenderer.flipX;
         objRenderer.sprite = spriteRenderer.sprite;
-        Color alphaValue = spriteRenderer.color - Color.black * startAlpha;
+        Color alphaValue = spriteRenderer.color - Color.black * (1 - startAlpha);
 
         StartCoroutine(corutine());
         IEnumerator corutine()
@@ -243,10 +271,7 @@ public partial class Player : Entity
     }
     private void WeaponChanage(EPlayerWeaponState weaponState)
     {
-        if (playerWeaponState == weaponState)
-            playerWeaponState = EPlayerWeaponState.Hand;
-        else
-            playerWeaponState = weaponState;
+        playerWeaponState = weaponState;
 
         hammerCharging = false;
         hammerChargingComplete = false;
@@ -286,7 +311,10 @@ public partial class Player : Entity
         BoxCollider2D collider2D = null;
 
         if (attackState != EPlayerAttackState.Upper)
+        {
+            rb.velocity = Vector2.zero;
             rb.AddForce(new Vector3(Input.GetAxisRaw("Horizontal") * 2f, 1f), ForceMode2D.Impulse);
+        }
 
         switch (attackState)
         {
@@ -294,6 +322,10 @@ public partial class Player : Entity
                 collider2D = weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index];
                 break;
             case EPlayerAttackState.Upper:
+                if (playerWeaponState == EPlayerWeaponState.Sword)
+                {
+                    rb.AddForce(Vector2.up * upperSelfForcePower, ForceMode2D.Impulse);
+                }
                 collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
                 break;
             case EPlayerAttackState.OnAir:
@@ -335,12 +367,10 @@ public partial class Player : Entity
                     physics2D.transform.GetComponent<Rigidbody2D>().AddForce(Vector2.up * (upperForcePower / 2), ForceMode2D.Impulse);
                     break;
                 case EPlayerAttackState.OnAir:
-                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 5;
-                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
+                    physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 6;
                     if (playerWeaponState == EPlayerWeaponState.Pistol)
                     {
                         Instantiate(gunLaser, UnityEngine.Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
-                        physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 2;
                         return;
                     }
                     break;
@@ -367,7 +397,10 @@ public partial class Player : Entity
     }
     private void UpperCut()
     {
+        if (onAir || playerWeaponState == EPlayerWeaponState.Hammer) return;
         attackState = EPlayerAttackState.Upper;
+        if (playerWeaponState == EPlayerWeaponState.Pistol || playerWeaponState == EPlayerWeaponState.Sword) return;
+        rb.velocity = Vector3.zero;
         rb.AddForce(Vector2.up * upperSelfForcePower, ForceMode2D.Impulse);
     }
     private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
@@ -464,6 +497,7 @@ public partial class Player : Entity
     {
         Vector2 pos = transform.position;
         float duration = 0;
+        float dir = lookDir;
 
         gunAirspin.SetActive(true);
 
@@ -473,28 +507,115 @@ public partial class Player : Entity
         {
             while (duration < 0.5f)
             {
+                if (!onAttack)
+                {
+                    gunAirspin.SetActive(false);
+                    yield break;
+                }
                 yield return null;
-                transform.position = new Vector3(pos.x + lookDir * index, pos.y);
+                transform.position = new Vector3(pos.x + dir * index, pos.y);
                 index += (index > 0 ? 1 : -1) * Time.deltaTime * 5;
                 duration += Time.deltaTime;
             }
             gunAirspin.SetActive(false);
         }
     }
+    private void GunGranadeLanch()
+    {
+        GameObject obj = Instantiate(gunGranade, gunGranadePos.position, Quaternion.identity);
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+
+        rb.AddForce(Vector2.right * lookDir * 10, ForceMode2D.Impulse);
+        rb.AddTorque(5);
+    }
     #endregion
     #region Skill
 
     private void ShotGun()
     {
-        animator.SetTrigger("ShotGun");
+        if (staminaValue < 1 || playerSkillState == EPlayerSkillState.Shotgun) return;
+        staminaValue -= 1;
 
-        state = EPlayerState.Idle;
+        ShadowInst(0.3f, 1);
+        state = EPlayerState.Skill;
+        playerSkillState = EPlayerSkillState.Shotgun;
         attackState = EPlayerAttackState.None;
         hammerCharging = false;
         hammerChargingComplete = false;
         onAttack = false;
     }
+    private void ShotGunAttack()
+    {
+        BoxCollider2D collider2D = null;
 
+        rb.AddForce(new Vector3(Input.GetAxisRaw("Horizontal") * 2f, 1f), ForceMode2D.Impulse);
+
+        collider2D = weaponAttackAreaClass.skillAttackArea[EPlayerSkillState.Shotgun];
+        var ray = AttackCollisionCheck(collider2D);
+        if (ray.Length > 0)
+        {
+            StartCoroutine(timeDelay());
+            IEnumerator timeDelay()
+            {
+                Time.timeScale = 0.1f;
+                yield return new WaitForSecondsRealtime(0.1f);
+                Time.timeScale = 1;
+            }
+        }
+
+        foreach (Collider2D physics2D in ray)
+        {
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
+            physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
+        }
+    }
+    private void ShotGunEnd()
+    {
+        state = EPlayerState.Idle;
+        playerSkillState = EPlayerSkillState.NONE;
+    }
+
+    private void Spear()
+    {
+        if (staminaValue < 1 || !onAir || playerSkillState == EPlayerSkillState.Spear) return;
+        staminaValue -= 1;
+        state = EPlayerState.Skill;
+        playerSkillState = EPlayerSkillState.Spear;
+        ShadowInst(0.3f, 1);
+    }
+    private void SpearAttack()
+    {
+        BoxCollider2D collider2D = null;
+
+        int layerMask = LayerMask.NameToLayer("Platform");
+        RaycastHit2D obj = Physics2D.Raycast(transform.position, Vector2.down, 15, 1 << layerMask);
+
+        transform.position = new Vector2(obj.point.x, obj.point.y);
+
+        collider2D = weaponAttackAreaClass.skillAttackArea[EPlayerSkillState.Spear];
+        var ray = AttackCollisionCheck(collider2D);
+        if (ray.Length > 0)
+        {
+            StartCoroutine(timeDelay());
+            IEnumerator timeDelay()
+            {
+                Time.timeScale = 0.1f;
+                yield return new WaitForSecondsRealtime(0.1f);
+                Time.timeScale = 1;
+            }
+        }
+
+        foreach (Collider2D physics2D in ray)
+        {
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
+            physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 5f);
+        }
+    }
+    private void SpearEnd()
+    {
+        playerSkillState = EPlayerSkillState.NONE;
+        state = EPlayerState.Idle;
+    }
     #endregion
     #endregion
     protected override void Die()
