@@ -25,7 +25,7 @@ public class Wall : BaseEnemy
     }
     protected override void Die()
     {
-        SoundManager.instance.PlaySound("SFX_Wall_Attack");
+        SoundManager.instance.PlaySound("SFX_Wall_Die");
 
         Player.instance.StartCoroutine(timeDelay());
         IEnumerator timeDelay()
@@ -46,8 +46,9 @@ public class Wall : BaseEnemy
 
     protected override void Hit(float value)
     {
-        SoundManager.instance.PlaySound("SFX_Wall_Attack");
+        Debug.Log("asd");
         StartCoroutine(Shake());
+        SoundManager.instance.PlaySound("SFX_Wall_Attack");
     }
 
     private IEnumerator Shake()
@@ -70,28 +71,21 @@ public class Wall : BaseEnemy
 
     void WallHpStatus(float value)
     {
-        if (value / maxHp < lastHpParts)
+        if (value / maxHp < 0.2f)
         {
-            SoundManager.instance.PlaySound("SFX_Wall_Crack");
             spriteRenderer.sprite = sprites[3];
         }
-        else if (value / maxHp < lastHpParts)
+        else if (value / maxHp < 0.4f)
         {
-            SoundManager.instance.PlaySound("SFX_Wall_Crack");
-            lastHpParts = 0.2f;
             spriteRenderer.sprite = sprites[2];
 
         }
-        else if (value / maxHp < lastHpParts)
+        else if (value / maxHp < 0.6f)
         {
-            SoundManager.instance.PlaySound("SFX_Wall_Crack");
-            lastHpParts = 0.4f;
             spriteRenderer.sprite = sprites[1];
         }
         else if (value / maxHp < 0.8f)
         {
-            SoundManager.instance.PlaySound("SFX_Wall_Crack");
-            lastHpParts = 0.6f;
             spriteRenderer.sprite = sprites[0];
         }
 

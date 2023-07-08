@@ -483,8 +483,6 @@ public partial class Player : Entity
             case EPlayerWeaponState.Sword:
                 SoundManager.instance.PlaySound("SFX_Enermy_Hit_Sowrd");
                 break;
-            case EPlayerWeaponState.Pistol:
-                break;
             case EPlayerWeaponState.Hammer:
                 SoundManager.instance.PlaySound("SFX_Enermy_Hit_Hammer");
                 break;

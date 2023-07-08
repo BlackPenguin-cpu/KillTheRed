@@ -10,7 +10,7 @@ public class BaseEnemy : Entity
     protected float stunTime;
     public float attackValue;
     protected int lookDir;
-    protected bool inviinvincibility;
+    protected bool invinvincibility;
 
     protected bool isDead;
 
@@ -19,7 +19,7 @@ public class BaseEnemy : Entity
         get => base.Hp;
         set
         {
-            if (inviinvincibility) return;
+            if (invinvincibility) return;
             base.Hp = value;
         }
     }
@@ -58,7 +58,7 @@ public class BaseEnemy : Entity
         rb.gravityScale = 1;
         stunTime = 0;
 
-        inviinvincibility = false;
+        invinvincibility = false;
     }
 
     protected override void Die()
