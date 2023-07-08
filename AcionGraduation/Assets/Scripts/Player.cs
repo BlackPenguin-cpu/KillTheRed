@@ -94,7 +94,7 @@ public partial class Player : Entity
     private Animator animator;
 
     readonly public float staminaMaxValue = 3;
-    readonly public float staminaaRegenSec = 3;
+    readonly public float staminaRegenSec = 3;
     public float staminaValue = 0;
 
     private float dashCooldown = 1;
@@ -139,7 +139,7 @@ public partial class Player : Entity
             playerSkillState = EPlayerSkillState.NONE;
 
         if (staminaValue <= staminaMaxValue)
-            staminaValue += Time.deltaTime * staminaaRegenSec;
+            staminaValue += Time.deltaTime * staminaRegenSec;
         dashCooldown -= Time.deltaTime;
         invincibleDuration -= Time.deltaTime;
         spriteRenderer.color = invincibleDuration > 0 ? new Color(1, 1, 1, 0.5f) : Color.white;
@@ -208,6 +208,8 @@ public partial class Player : Entity
     private void Jump()
     {
         if (onAir) return;
+
+        SoundManager.instance.PlaySound("SFX_Pl_Jump");
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         state = EPlayerState.Jump;
         onAir = true;
@@ -227,6 +229,8 @@ public partial class Player : Entity
         {
             state = EPlayerState.Idle;
         }
+
+
         var spdValue = hor * spd * Time.deltaTime * (hammerCharging ? 0.4f : 1);
 
         transform.position += Vector3.right * spdValue;
@@ -238,6 +242,9 @@ public partial class Player : Entity
             dashCooldown = 1;
         else
             return;
+
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Flash");
+
         float duration = 0.1f;
         staminaValue -= 1;
 
@@ -288,7 +295,24 @@ public partial class Player : Entity
     }
     private void WeaponChanage(EPlayerWeaponState value)
     {
-        if (weaponState[value] == false) return;
+        if (weaponState[value] == false && hammerChargingComplete) return;
+
+        switch (value)
+        {
+            case EPlayerWeaponState.Hand:
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Fist");
+                break;
+            case EPlayerWeaponState.Sword:
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Sowrd");
+                break;
+            case EPlayerWeaponState.Pistol:
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Pistol");
+                break;
+            case EPlayerWeaponState.Hammer:
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Mammer");
+                break;
+        }
+
         playerWeaponState = value;
 
         hammerCharging = false;
@@ -302,13 +326,15 @@ public partial class Player : Entity
         switch (attackState)
         {
             case EPlayerAttackState.None:
-                collider2D = weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index];
+                BigAttackSound(nowAttackWeaponState);
+                collider2D = weaponAttackAreaClass.weaponGroundAttack[nowAttackWeaponState][index];
                 break;
             case EPlayerAttackState.Upper:
-                collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
+                collider2D = weaponAttackAreaClass.weaponUpperCutArea[nowAttackWeaponState];
                 break;
             case EPlayerAttackState.OnAir:
-                collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[playerWeaponState][index];
+                BigAttackSound(nowAttackWeaponState);
+                collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[nowAttackWeaponState][index];
                 if (playerWeaponState == EPlayerWeaponState.Hand && index == 3)
                 {
                     break;
@@ -319,6 +345,8 @@ public partial class Player : Entity
         var ray = AttackCollisionCheck(collider2D);
         foreach (Collider2D physics2D in ray)
         {
+            BaseWeaponHitSound(nowAttackWeaponState);
+
             physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage * 2;
             physics2D.transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(lookDir * 3, 2.5f), ForceMode2D.Impulse);
         }
@@ -338,16 +366,19 @@ public partial class Player : Entity
         switch (attackState)
         {
             case EPlayerAttackState.None:
+                BaseAttackSound(nowAttackWeaponState);
                 collider2D = weaponAttackAreaClass.weaponGroundAttack[nowAttackWeaponState][index];
                 break;
             case EPlayerAttackState.Upper:
+                UpperAttackSound(nowAttackWeaponState);
+
                 if (nowAttackWeaponState == EPlayerWeaponState.Sword)
-                {
                     rb.AddForce(Vector2.up * upperSelfForcePower, ForceMode2D.Impulse);
-                }
+
                 collider2D = weaponAttackAreaClass.weaponUpperCutArea[nowAttackWeaponState];
                 break;
             case EPlayerAttackState.OnAir:
+                BaseAttackSound(nowAttackWeaponState);
                 collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[nowAttackWeaponState][index];
                 if (playerWeaponState == EPlayerWeaponState.Hand && index == 3)
                 {
@@ -382,6 +413,8 @@ public partial class Player : Entity
 
         foreach (Collider2D physics2D in ray)
         {
+            BaseWeaponHitSound(nowAttackWeaponState);
+
             physics2D.transform.GetComponent<BaseEnemy>().Hp -= dmgValue;
 
             switch (attackState)
@@ -406,6 +439,73 @@ public partial class Player : Entity
                     }
                     break;
             }
+        }
+    }
+
+    private void UpperAttackSound(EPlayerWeaponState weaponState)
+    {
+        switch (weaponState)
+        {
+            case EPlayerWeaponState.Hand:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Fist");
+                break;
+            case EPlayerWeaponState.Sword:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Sowrd");
+                break;
+            case EPlayerWeaponState.Pistol:
+                break;
+            case EPlayerWeaponState.Hammer:
+                break;
+        }
+    }
+    private void BigAttackSound(EPlayerWeaponState weaponState)
+    {
+        switch (weaponState)
+        {
+            case EPlayerWeaponState.Hand:
+                break;
+            case EPlayerWeaponState.Sword:
+                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attack_Sowrd");
+                break;
+            case EPlayerWeaponState.Pistol:
+                break;
+            case EPlayerWeaponState.Hammer:
+                break;
+        }
+    }
+    private void BaseWeaponHitSound(EPlayerWeaponState weaponState)
+    {
+        switch (weaponState)
+        {
+            case EPlayerWeaponState.Hand:
+                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Fist");
+                break;
+            case EPlayerWeaponState.Sword:
+                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Sowrd");
+                break;
+            case EPlayerWeaponState.Pistol:
+                break;
+            case EPlayerWeaponState.Hammer:
+                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Hammer");
+                break;
+        }
+    }
+    private void BaseAttackSound(EPlayerWeaponState weaponState)
+    {
+        switch (weaponState)
+        {
+            case EPlayerWeaponState.Hand:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Fist");
+                break;
+            case EPlayerWeaponState.Sword:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Sowrd");
+                break;
+            case EPlayerWeaponState.Pistol:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol");
+                break;
+            case EPlayerWeaponState.Hammer:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer");
+                break;
         }
     }
     public void AttackEnd()
@@ -441,7 +541,6 @@ public partial class Player : Entity
         return Physics2D.OverlapBoxAll(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
 
-    public void HammerChargeComplete() => hammerChargingComplete = true;
 
     #region PlayerSkillEffect
     #region Hand
@@ -455,6 +554,8 @@ public partial class Player : Entity
     }
     private void HandAirAttackFinish()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist");
+
         int layerMask = LayerMask.NameToLayer("Platform");
         RaycastHit2D obj = Physics2D.Raycast(transform.position, Vector2.down, 15, 1 << layerMask);
 
@@ -464,6 +565,8 @@ public partial class Player : Entity
     #region Sword
     private void SwordDownAttack()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Critical_Attack_Sowrd");
+
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Sword][3]);
         foreach (Collider2D obj in objs)
         {
@@ -476,8 +579,15 @@ public partial class Player : Entity
     }
     #endregion
     #region Hammer
+    public void HammerChargeComplete()
+    {
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge", SoundType.SE, 0.5f);
+        hammerChargingComplete = true;
+    }
     private void HammerAttack()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack", SoundType.SE, 2f);
+
         hammerCharging = false;
         hammerChargingComplete = false;
 
@@ -568,6 +678,8 @@ public partial class Player : Entity
         if (staminaValue < 1 || playerSkillState == EPlayerSkillState.Shotgun || skillState[EPlayerSkillState.Shotgun] == false) return;
         staminaValue -= 1;
 
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Shotgun");
+
         ShadowInst(0.3f, 1);
         state = EPlayerState.Skill;
         playerSkillState = EPlayerSkillState.Shotgun;
@@ -614,9 +726,13 @@ public partial class Player : Entity
         state = EPlayerState.Skill;
         playerSkillState = EPlayerSkillState.Spear;
         ShadowInst(0.3f, 1);
+
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Spear");
     }
     private void SpearAttack()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Spear_Attack");
+
         BoxCollider2D collider2D = null;
 
         int layerMask = LayerMask.NameToLayer("Platform");
@@ -657,7 +773,16 @@ public partial class Player : Entity
 
     protected override void Hit(float value)
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Hit");
         Camera.main.DOShakePosition(0.3f, 2);
         invincibleDuration = 1;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6 && onAir)
+        {
+            SoundManager.instance.PlaySound("SFX_Pl_Fall");
+        }
     }
 }

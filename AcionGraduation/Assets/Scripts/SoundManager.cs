@@ -21,12 +21,12 @@ public class SoundManager : MonoBehaviour
     {
         instance = this;
 
-        GameObject Se = new GameObject();
+        GameObject Se = new GameObject("SFXSoundSource");
         Se.transform.parent = transform;
         Se.AddComponent<AudioSource>();
         AudioSources[SoundType.SE] = Se.GetComponent<AudioSource>();
 
-        GameObject Bgm = new GameObject();
+        GameObject Bgm = new GameObject("BGMSoundSource");
         Bgm.transform.parent = transform;
         Bgm.AddComponent<AudioSource>().loop = true;
         AudioSources[SoundType.BGM] = Bgm.GetComponent<AudioSource>();

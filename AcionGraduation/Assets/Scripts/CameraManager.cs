@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class CameraManager : MonoBehaviour
     public static CameraManager instance;
     public float speed;
     public Image flashScreen;
+    public Image fadeScreen;
     public ECameraState cameraState;
 
     private Player playerObj;
@@ -29,17 +31,60 @@ public class CameraManager : MonoBehaviour
         if (cameraState == ECameraState.Tutorial) return;
         transform.position = Vector3.Lerp(transform.position, new Vector3(playerObj.transform.position.x, 0, -10), Time.deltaTime * speed);
     }
-    public void Flash(float duration, float startValue = 1f, float endValue = 0.1f)
+    public void Flash(float duration, float startValue = 0.2f, float endValue = 0f)
     {
-        float i = startValue;
+        float i = 1 - startValue;
         Color color = new Color(1, 1, 1, startValue);
 
-        while (i < endValue)
+        StartCoroutine(fade());
+        IEnumerator fade()
         {
+
+            while (i <= 1)
+            {
+                flashScreen.color = color;
+                color.a = Mathf.Lerp(1, endValue, i);
+                i += Time.deltaTime / duration;
+                yield return null;
+            }
+            color.a = 0;
             flashScreen.color = color;
-            color.a = Mathf.Lerp(startValue, endValue, i);
-            i += Time.deltaTime / duration;
         }
 
+    }
+    public void Fade(float duration, bool isFadeOut = true)
+    {
+        float i = 0;
+        Color color = new Color(0, 0, 0, 0);
+
+        if (isFadeOut)
+            StartCoroutine(fadeOut());
+        else
+            StartCoroutine(fadeIn());
+
+        IEnumerator fadeOut()
+        {
+            while (i <= 1)
+            {
+                fadeScreen.color = color;
+                color.a = Mathf.Lerp(0, 1, i);
+                i += Time.deltaTime / duration;
+                yield return null;
+            }
+            color.a = 1;
+            fadeScreen.color = color;
+        }
+        IEnumerator fadeIn()
+        {
+            while (i <= 1)
+            {
+                fadeScreen.color = Color.black;
+                color.a = Mathf.Lerp(1, 0, i);
+                i += Time.deltaTime / duration;
+                yield return null;
+            }
+            color.a = 0;
+            fadeScreen.color = color;
+        }
     }
 }

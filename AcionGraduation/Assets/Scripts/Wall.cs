@@ -12,6 +12,8 @@ public class Wall : BaseEnemy
     [SerializeField]
     private ParticleSystem[] particleSystems;
 
+    float lastHpParts = 1;
+
     public override float Hp
     {
         get => base.Hp;
@@ -23,6 +25,8 @@ public class Wall : BaseEnemy
     }
     protected override void Die()
     {
+        SoundManager.instance.PlaySound("SFX_Wall_Attack");
+
         Player.instance.StartCoroutine(timeDelay());
         IEnumerator timeDelay()
         {
@@ -42,6 +46,7 @@ public class Wall : BaseEnemy
 
     protected override void Hit(float value)
     {
+        SoundManager.instance.PlaySound("SFX_Wall_Attack");
         StartCoroutine(Shake());
     }
 
@@ -65,21 +70,28 @@ public class Wall : BaseEnemy
 
     void WallHpStatus(float value)
     {
-        if (value / maxHp < 0.2f)
+        if (value / maxHp < lastHpParts)
         {
+            SoundManager.instance.PlaySound("SFX_Wall_Crack");
             spriteRenderer.sprite = sprites[3];
         }
-        else if (value / maxHp < 0.4f)
+        else if (value / maxHp < lastHpParts)
         {
+            SoundManager.instance.PlaySound("SFX_Wall_Crack");
+            lastHpParts = 0.2f;
             spriteRenderer.sprite = sprites[2];
 
         }
-        else if (value / maxHp < 0.6f)
+        else if (value / maxHp < lastHpParts)
         {
+            SoundManager.instance.PlaySound("SFX_Wall_Crack");
+            lastHpParts = 0.4f;
             spriteRenderer.sprite = sprites[1];
         }
         else if (value / maxHp < 0.8f)
         {
+            SoundManager.instance.PlaySound("SFX_Wall_Crack");
+            lastHpParts = 0.6f;
             spriteRenderer.sprite = sprites[0];
         }
 

@@ -18,12 +18,13 @@ public abstract class Entity : SerializedMonoBehaviour
         set
         {
             value = Mathf.Clamp(value, 0, maxHp);
+            hp = value;
             if (hitState != EHitState.KnockDown && value == 0)
             {
                 Die();
+                return;
             }
             if (value < hp) Hit(hp - value);
-            hp = value;
         }
     }
     public EHitState hitState;

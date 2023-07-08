@@ -94,6 +94,12 @@ public class SmallEnemy : BaseEnemy
     }
     private void AttackCheck(int isShake)
     {
+        if (gameObject.name.Contains("Big"))
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_02");
+        else if (gameObject.name.Contains("Tall"))
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_03");
+        else
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_01");
         if (AttackCollisionCheck(AttackArea))
         {
             player.Hp -= attackValue;
@@ -109,5 +115,10 @@ public class SmallEnemy : BaseEnemy
     {
         base.Hit(damage);
         HitParticle.Play();
+    }
+    protected override void Die()
+    {
+        base.Die();
+        SoundManager.instance.PlaySound("SFX_Enermy_Died");
     }
 }

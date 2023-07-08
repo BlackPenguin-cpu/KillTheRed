@@ -26,6 +26,8 @@ public class Granade : MonoBehaviour
     }
     private void Boom()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Pistol_Uppcut");
+
         transform.eulerAngles = Vector3.zero;
         var ray = AttackCollisionCheck(attackCollider);
 
