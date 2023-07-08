@@ -4,10 +4,6 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using DG.Tweening;
-using System;
-using Sirenix.OdinInspector.Editor.Validation;
-using JetBrains.Annotations;
-using System.Reflection;
 
 public enum EPlayerWeaponState
 {
@@ -102,11 +98,24 @@ public partial class Player : Entity
     public float staminaValue = 0;
 
     private float dashCooldown = 1;
+    private float invincibleDuration;
+
+    private EPlayerWeaponState nowAttackWeaponState;
 
     [DictionaryDrawerSettings]
     public Dictionary<EPlayerWeaponState, bool> weaponState;
     public Dictionary<EPlayerSkillState, bool> skillState;
 
+
+    public override float Hp
+    {
+        get => base.Hp;
+        set
+        {
+            if (invincibleDuration > 0) return;
+            base.Hp = value;
+        }
+    }
     private void Awake()
     {
         instance = this;
@@ -125,12 +134,15 @@ public partial class Player : Entity
         PlayerInput();
         AnimatorApply();
 
+
         if (state != EPlayerState.Skill)
             playerSkillState = EPlayerSkillState.NONE;
 
         if (staminaValue <= staminaMaxValue)
             staminaValue += Time.deltaTime * staminaaRegenSec;
         dashCooldown -= Time.deltaTime;
+        invincibleDuration -= Time.deltaTime;
+        spriteRenderer.color = invincibleDuration > 0 ? new Color(1, 1, 1, 0.5f) : Color.white;
     }
     private void AnimatorApply()
     {
@@ -281,6 +293,7 @@ public partial class Player : Entity
 
         hammerCharging = false;
         hammerChargingComplete = false;
+
     }
     private void BigAttack(int index)
     {
@@ -325,17 +338,17 @@ public partial class Player : Entity
         switch (attackState)
         {
             case EPlayerAttackState.None:
-                collider2D = weaponAttackAreaClass.weaponGroundAttack[playerWeaponState][index];
+                collider2D = weaponAttackAreaClass.weaponGroundAttack[nowAttackWeaponState][index];
                 break;
             case EPlayerAttackState.Upper:
-                if (playerWeaponState == EPlayerWeaponState.Sword)
+                if (nowAttackWeaponState == EPlayerWeaponState.Sword)
                 {
                     rb.AddForce(Vector2.up * upperSelfForcePower, ForceMode2D.Impulse);
                 }
-                collider2D = weaponAttackAreaClass.weaponUpperCutArea[playerWeaponState];
+                collider2D = weaponAttackAreaClass.weaponUpperCutArea[nowAttackWeaponState];
                 break;
             case EPlayerAttackState.OnAir:
-                collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[playerWeaponState][index];
+                collider2D = weaponAttackAreaClass.weaponOnAirAttackArea[nowAttackWeaponState][index];
                 if (playerWeaponState == EPlayerWeaponState.Hand && index == 3)
                 {
                     return;
@@ -355,17 +368,29 @@ public partial class Player : Entity
             }
         }
 
+
+        float dmgValue = attackDamage;
+        switch (nowAttackWeaponState)
+        {
+            case EPlayerWeaponState.Pistol:
+                dmgValue = 2;
+                break;
+            case EPlayerWeaponState.Hammer:
+                dmgValue = 10;
+                break;
+        }
+
         foreach (Collider2D physics2D in ray)
         {
-            physics2D.transform.GetComponent<BaseEnemy>().Hp -= attackDamage;
+            physics2D.transform.GetComponent<BaseEnemy>().Hp -= dmgValue;
 
             switch (attackState)
             {
                 case EPlayerAttackState.None:
                     physics2D.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(lookDir * 2, 1f);
-                    if (playerWeaponState == EPlayerWeaponState.Pistol)
+                    if (nowAttackWeaponState == EPlayerWeaponState.Pistol)
                     {
-                        Instantiate(gunLaser, UnityEngine.Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
+                        Instantiate(gunLaser, Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
                         return;
                     }
                     break;
@@ -374,9 +399,9 @@ public partial class Player : Entity
                     break;
                 case EPlayerAttackState.OnAir:
                     physics2D.transform.GetComponent<Rigidbody2D>().velocity = Vector3.up * 6;
-                    if (playerWeaponState == EPlayerWeaponState.Pistol)
+                    if (nowAttackWeaponState == EPlayerWeaponState.Pistol)
                     {
-                        Instantiate(gunLaser, UnityEngine.Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
+                        Instantiate(gunLaser, Random.insideUnitCircle / 2 + (Vector2)physics2D.transform.position + physics2D.offset, Quaternion.Euler(0, 0, lookDir == -1 ? 180 : 0));
                         return;
                     }
                     break;
@@ -392,6 +417,7 @@ public partial class Player : Entity
     public void AttackStart()
     {
         onAttack = true;
+        nowAttackWeaponState = playerWeaponState;
     }
     private IEnumerator AttackDelay()
     {
@@ -411,7 +437,7 @@ public partial class Player : Entity
     }
     private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Enemy") |  1 << LayerMask.NameToLayer("Wall");
+        int layerMask = 1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Wall");
         return Physics2D.OverlapBoxAll(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
 
@@ -495,7 +521,7 @@ public partial class Player : Entity
     private void GunLastShot()
     {
         Vector2 pos = gunSpark.transform.localPosition;
-        gunSpark.transform.localPosition = new Vector2(MathF.Abs(pos.x) * lookDir, pos.y);
+        gunSpark.transform.localPosition = new Vector2(System.MathF.Abs(pos.x) * lookDir, pos.y);
 
         gunSpark.SetActive(true);
     }
@@ -632,5 +658,6 @@ public partial class Player : Entity
     protected override void Hit(float value)
     {
         Camera.main.DOShakePosition(0.3f, 2);
+        invincibleDuration = 1;
     }
 }

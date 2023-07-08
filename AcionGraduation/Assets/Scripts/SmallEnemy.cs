@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -68,13 +69,20 @@ public class SmallEnemy : BaseEnemy
                 yield return null;
                 continue;
             }
-            state = Mathf.Abs(player.transform.position.x - transform.position.x) > 1 ? EEnemyState.Trace : EEnemyState.Attack;
+            state = Mathf.Abs(player.transform.position.x - transform.position.x) > (AttackArea.size.x / 2 + AttackArea.offset.x) ? EEnemyState.Trace : EEnemyState.Attack;
 
             if (state == EEnemyState.Attack)
-                yield return StartCoroutine(Attack());
+            {
+                while (state == EEnemyState.Attack)
+                    yield return null;
+            }
             else
                 yield return waitSeconds;
         }
+    }
+    private void AttackEnd()
+    {
+        state = EEnemyState.Trace;
     }
     private IEnumerator Attack()
     {
@@ -84,13 +92,17 @@ public class SmallEnemy : BaseEnemy
 
         yield return null;
     }
-    private void AttackCheck()
+    private void AttackCheck(int isShake)
     {
         if (AttackCollisionCheck(AttackArea))
         {
             player.Hp -= attackValue;
             Vector3 pos = player.transform.position - transform.position;
             player.GetComponent<Rigidbody2D>().AddForce(new Vector3(pos.x / Mathf.Abs(pos.x) * 2, 1), ForceMode2D.Impulse);
+        }
+        if (isShake == 1)
+        {
+            Camera.main.DOShakePosition(0.2f, 2);
         }
     }
     protected override void Hit(float damage)

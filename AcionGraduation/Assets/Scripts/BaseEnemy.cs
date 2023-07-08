@@ -12,6 +12,8 @@ public class BaseEnemy : Entity
     protected int lookDir;
     protected bool inviinvincibility;
 
+    protected bool isDead;
+
     public override float Hp
     {
         get => base.Hp;
@@ -23,6 +25,8 @@ public class BaseEnemy : Entity
     }
     protected virtual void Update()
     {
+        if (hitState == EHitState.KnockDown && hp <= 0)
+            Die();
         StateApply();
     }
     private void StateApply()
@@ -39,7 +43,8 @@ public class BaseEnemy : Entity
         }
         if (stunTime <= 1 && hitState == EHitState.KnockDown)
         {
-            stunTime += Time.deltaTime;
+            if (hp > 0)
+                stunTime += Time.deltaTime;
             if (stunTime > 1)
             {
                 StandUp();
@@ -59,7 +64,7 @@ public class BaseEnemy : Entity
     protected override void Die()
     {
         if (hitState == EHitState.KnockDown)
-            Destroy(gameObject);
+            Destroy(gameObject, 1);
     }
     protected override void Hit(float damage)
     {

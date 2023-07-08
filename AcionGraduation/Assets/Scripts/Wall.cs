@@ -23,10 +23,10 @@ public class Wall : BaseEnemy
     }
     protected override void Die()
     {
-        StartCoroutine(timeDelay());
+        Player.instance.StartCoroutine(timeDelay());
         IEnumerator timeDelay()
         {
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(0.2f);
             yield return null;
             Time.timeScale = 0.1f;
             yield return new WaitForSecondsRealtime(1f);
