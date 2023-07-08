@@ -37,7 +37,8 @@ public enum EPlayerSkillState
 {
     NONE,
     Shotgun,
-    Spear
+    Spear,
+    Dash
 }
 public partial class Player : Entity
 {
@@ -97,13 +98,14 @@ public partial class Player : Entity
     private Animator animator;
 
     readonly public float staminaMaxValue = 3;
-    readonly public float staminaaRegenSec = 1;
+    readonly public float staminaaRegenSec = 3;
     public float staminaValue = 0;
 
     private float dashCooldown = 1;
 
     [DictionaryDrawerSettings]
     public Dictionary<EPlayerWeaponState, bool> weaponState;
+    public Dictionary<EPlayerSkillState, bool> skillState;
 
     private void Awake()
     {
@@ -219,7 +221,7 @@ public partial class Player : Entity
     }
     private void Dash()
     {
-        if (state == EPlayerState.Attack || staminaValue < 1) return;
+        if (state == EPlayerState.Attack || staminaValue < 1 || skillState[EPlayerSkillState.Dash] == false) return;
         if (dashCooldown < 0)
             dashCooldown = 1;
         else
@@ -537,7 +539,7 @@ public partial class Player : Entity
 
     private void ShotGun()
     {
-        if (staminaValue < 1 || playerSkillState == EPlayerSkillState.Shotgun) return;
+        if (staminaValue < 1 || playerSkillState == EPlayerSkillState.Shotgun || skillState[EPlayerSkillState.Shotgun] == false) return;
         staminaValue -= 1;
 
         ShadowInst(0.3f, 1);
@@ -581,7 +583,7 @@ public partial class Player : Entity
 
     private void Spear()
     {
-        if (staminaValue < 1 || !onAir || playerSkillState == EPlayerSkillState.Spear) return;
+        if (staminaValue < 1 || !onAir || playerSkillState == EPlayerSkillState.Spear || skillState[EPlayerSkillState.Spear] == false) return;
         staminaValue -= 1;
         state = EPlayerState.Skill;
         playerSkillState = EPlayerSkillState.Spear;

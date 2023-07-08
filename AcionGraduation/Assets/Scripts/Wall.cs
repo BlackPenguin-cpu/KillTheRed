@@ -37,7 +37,7 @@ public class Wall : BaseEnemy
             ps.Play();
         }
         gameObject.SetActive(false);
-        Destroy(gameObject,2f);
+        Destroy(gameObject, 2f);
     }
 
     protected override void Hit(float value)
@@ -50,7 +50,7 @@ public class Wall : BaseEnemy
         for (int i = 0; i < 10; i++)
         {
             Vector3 pos = (Vector3)Random.insideUnitCircle / 10;
-            transform.position += new Vector3(pos.x,pos.y/10);
+            transform.position += new Vector3(pos.x, pos.y / 10);
             yield return new WaitForSeconds(0.02f);
         }
         transform.position = originPos;
@@ -65,20 +65,20 @@ public class Wall : BaseEnemy
 
     void WallHpStatus(float value)
     {
-        if (value / 100 < 0.2f)
+        if (value / maxHp < 0.2f)
         {
             spriteRenderer.sprite = sprites[3];
         }
-        else if (value / 100 < 0.4f)
+        else if (value / maxHp < 0.4f)
         {
             spriteRenderer.sprite = sprites[2];
 
         }
-        else if (value / 100 < 0.6f)
+        else if (value / maxHp < 0.6f)
         {
             spriteRenderer.sprite = sprites[1];
         }
-        else if (value / 100 < 0.8f)
+        else if (value / maxHp < 0.8f)
         {
             spriteRenderer.sprite = sprites[0];
         }
@@ -86,8 +86,8 @@ public class Wall : BaseEnemy
 
 
     }
-    void Update()
+    protected override void Update()
     {
-
+        base.Update();
     }
 }

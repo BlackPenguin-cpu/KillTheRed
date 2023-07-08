@@ -40,11 +40,12 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: cca674307a31a3a46a7a871478be2aa5, type: 3}
   - {fileID: 21300000, guid: 4fb033318bdddb444950d58298113992, type: 3}
-  - {fileID: 21300000, guid: 551779757fde24d479f21b6cd1bcc512, type: 3}
+  - {fileID: -442854788, guid: bf644992107cb7d43b41a091ab773c3f, type: 3}
+  - {fileID: 1306324393, guid: bf644992107cb7d43b41a091ab773c3f, type: 3}
+  - {fileID: 1528570470, guid: bf644992107cb7d43b41a091ab773c3f, type: 3}
+  - {fileID: 202870150, guid: bf644992107cb7d43b41a091ab773c3f, type: 3}
+  - {fileID: -383654718, guid: bf644992107cb7d43b41a091ab773c3f, type: 3}
   - {fileID: 21300000, guid: e2487e26fe5721a4c9dd6b0f15cf194b, type: 3}
-  - {fileID: 21300000, guid: 6f81cd38d0be9de4bbc9f40eca41f403, type: 3}
-  - {fileID: 21300000, guid: 4118ddb8e69be16489a17c2a19512624, type: 3}
-  - {fileID: 21300000, guid: 8e1c9f493f1b83a48831af2829268b39, type: 3}
   - {fileID: 21300000, guid: decc810bb2a859a46a60730e419a1c3a, type: 3}
   - {fileID: -2126940550, guid: d02f02ebab3199e4a8b7e3de12a6db3d, type: 3}
   - {fileID: 1314883415, guid: d02f02ebab3199e4a8b7e3de12a6db3d, type: 3}
@@ -53,15 +54,15 @@ SpriteAtlas:
   - {fileID: -938853092, guid: d02f02ebab3199e4a8b7e3de12a6db3d, type: 3}
   - {fileID: -516508950, guid: d02f02ebab3199e4a8b7e3de12a6db3d, type: 3}
   - {fileID: 512256489, guid: d02f02ebab3199e4a8b7e3de12a6db3d, type: 3}
-  - {fileID: 21300000, guid: 1dd0ceac74b5de445b969845409ef0c5, type: 3}
   m_PackedSpriteNamesToIndex:
   - wall_break_4
   - wall_break_2
-  - Obj_Wall_02
+  - Obj_Wall_4
+  - Obj_Wall_0
+  - Obj_Wall_1
+  - Obj_Wall_2
+  - Obj_Wall_3
   - wall_break_3
-  - Obj_Wall_04
-  - Obj_Wall_03
-  - Obj_Wall_05
   - wall_break_1
   - BG_02_Tutorial_torch_6
   - BG_02_Tutorial_torch_4
@@ -70,7 +71,6 @@ SpriteAtlas:
   - BG_02_Tutorial_torch_3
   - BG_02_Tutorial_torch_0
   - BG_02_Tutorial_torch_1
-  - Obj_Wall_01
   m_RenderDataMap: {}
   m_Tag: Wall
   m_IsVariant: 0
