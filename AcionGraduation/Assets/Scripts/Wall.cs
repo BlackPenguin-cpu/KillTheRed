@@ -46,7 +46,6 @@ public class Wall : BaseEnemy
 
     protected override void Hit(float value)
     {
-        Debug.Log("asd");
         StartCoroutine(Shake());
         SoundManager.instance.PlaySound("SFX_Wall_Attack");
     }

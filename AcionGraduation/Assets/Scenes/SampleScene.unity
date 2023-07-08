@@ -7358,6 +7358,56 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.236434, y: 1.2721069}
   m_EdgeRadius: 0
+--- !u!1 &2114435403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2114435405}
+  - component: {fileID: 2114435404}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2114435404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114435403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ea69464cd94744c8aea551a5e6d33c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+  - {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+  - {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+  bigEnemyOn: 0
+  tallEnemyOn: 0
+--- !u!4 &2114435405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114435403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.831739, y: 12.725712, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136117089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7481,11 +7531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2767310358501001943, guid: 208caab72c3d24e448bd53714d72ce7d, type: 3}
       propertyPath: hp
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2767310358501001943, guid: 208caab72c3d24e448bd53714d72ce7d, type: 3}
       propertyPath: maxHp
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2767310358501001943, guid: 208caab72c3d24e448bd53714d72ce7d, type: 3}
       propertyPath: sprites.Array.data[0]

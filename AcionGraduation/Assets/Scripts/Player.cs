@@ -776,11 +776,11 @@ public partial class Player : Entity
         invincibleDuration = 1;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 6 && onAir)
-        {
-            SoundManager.instance.PlaySound("SFX_Pl_Fall");
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.layer == 6 && onAir)
+    //    {
+    //        SoundManager.instance.PlaySound("SFX_Pl_Fall");
+    //    }
+    //}
 }
