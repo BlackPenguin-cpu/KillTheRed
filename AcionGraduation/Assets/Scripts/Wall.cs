@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Wall : BaseEnemy
 {
+    private Vector3 originPos;
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private Sprite[] sprites;
+
+    [SerializeField]
+    private ParticleSystem[] particleSystems;
 
     public override float Hp
     {
@@ -19,16 +23,43 @@ public class Wall : BaseEnemy
     }
     protected override void Die()
     {
-        Destroy(gameObject);
+        StartCoroutine(timeDelay());
+        IEnumerator timeDelay()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            yield return null;
+            Time.timeScale = 0.1f;
+            yield return new WaitForSecondsRealtime(1f);
+            Time.timeScale = 1;
+        }
+        foreach (var ps in particleSystems)
+        {
+            ps.Play();
+        }
+        gameObject.SetActive(false);
+        Destroy(gameObject,2f);
     }
 
     protected override void Hit(float value)
     {
+        StartCoroutine(Shake());
+    }
+
+    private IEnumerator Shake()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 pos = (Vector3)Random.insideUnitCircle / 10;
+            transform.position += new Vector3(pos.x,pos.y/10);
+            yield return new WaitForSeconds(0.02f);
+        }
+        transform.position = originPos;
     }
 
     protected override void Start()
     {
         base.Start();
+        originPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

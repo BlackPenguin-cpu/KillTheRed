@@ -102,6 +102,9 @@ public partial class Player : Entity
 
     private float dashCooldown = 1;
 
+    [DictionaryDrawerSettings]
+    public Dictionary<EPlayerWeaponState, bool> weaponState;
+
     private void Awake()
     {
         instance = this;
@@ -269,9 +272,10 @@ public partial class Player : Entity
             Destroy(obj.gameObject);
         }
     }
-    private void WeaponChanage(EPlayerWeaponState weaponState)
+    private void WeaponChanage(EPlayerWeaponState value)
     {
-        playerWeaponState = weaponState;
+        if (weaponState[value] == false) return;
+        playerWeaponState = value;
 
         hammerCharging = false;
         hammerChargingComplete = false;
@@ -405,7 +409,7 @@ public partial class Player : Entity
     }
     private Collider2D[] AttackCollisionCheck(BoxCollider2D collider2D)
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Enemy");
+        int layerMask = 1 << LayerMask.NameToLayer("Enemy") |  1 << LayerMask.NameToLayer("Wall");
         return Physics2D.OverlapBoxAll(transform.position + new Vector3(collider2D.offset.x * lookDir, collider2D.offset.y), collider2D.size, 0, layerMask);
     }
 
