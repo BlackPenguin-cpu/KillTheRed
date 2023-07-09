@@ -28810,6 +28810,78 @@ MonoBehaviour:
     - delay: 2
       posNum: 0
       enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+  wavePatternsType6:
+  - wavePatterns:
+    - delay: 0
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+  - wavePatterns:
+    - delay: 3
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+    - delay: 3
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+    - delay: 3
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+  - wavePatterns:
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 2
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+  - wavePatterns:
+    - delay: 0
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+    - delay: 0
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+    - delay: 0
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+  - wavePatterns:
+    - delay: 0.25
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+    - delay: 0.8
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+    - delay: 1
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 0.5
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
+    - delay: 0.5
+      posNum: 0
+      enemy: {fileID: 9210925883604360821, guid: 246c761c9e178c34385a31fba84a1fa7, type: 3}
+    - delay: 1
+      posNum: 0
+      enemy: {fileID: 1901572108611959111, guid: a790e7eb71e3e6245b62591414163910, type: 3}
+    - delay: 0.5
+      posNum: 0
+      enemy: {fileID: 6637856972175196151, guid: 18c03704e781e2f44998c04ae9be4270, type: 3}
   summonPos:
   - {x: 20, y: 0, z: 0}
   - {x: -20, y: 0, z: 0}

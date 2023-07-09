@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public WavePatterns[] wavePatternsType3;
     public WavePatterns[] wavePatternsType4;
     public WavePatterns[] wavePatternsType5;
+    public WavePatterns[] wavePatternsType6;
 
     public Vector3[] summonPos;
     private void Awake()
@@ -68,6 +69,9 @@ public class GameManager : MonoBehaviour
                         break;
                     case 5:
                         wavePatterns = wavePatternsType5[Random.Range(0, wavePatternsType5.Length)];
+                        break;
+                    case 6:
+                        wavePatterns = wavePatternsType6[Random.Range(0, wavePatternsType6.Length)];
                         break;
                 }
 
