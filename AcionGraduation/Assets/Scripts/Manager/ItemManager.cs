@@ -34,6 +34,10 @@ public class ItemManager : MonoBehaviour
     public TextMeshProUGUI info;
     public TextMeshProUGUI keyName;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     public void ItemGet(EItemList value)
     {
         ItemInfo nowItemInfos = itemInfos[(int)value];
@@ -69,6 +73,7 @@ public class ItemManager : MonoBehaviour
         StartCoroutine(MainBoardTurnOn());
         IEnumerator MainBoardTurnOn()
         {
+            SoundManager.instance.PlaySound("SFX_Earn rewards",SoundType.SE,0.5f);
             mainBoard.gameObject.SetActive(true);
             yield return new WaitForSeconds(5);
             mainBoard.gameObject.SetActive(false);

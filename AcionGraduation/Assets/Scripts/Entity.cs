@@ -17,13 +17,14 @@ public abstract class Entity : SerializedMonoBehaviour
         get { return hp; }
         set
         {
+            if (value < hp) Hit(hp - value);
             value = Mathf.Clamp(value, 0, maxHp);
-            if ( value == 0)
+            if (value == 0)
             {
                 Die();
+                hp = value;
                 return;
             }
-            if (value < hp) Hit(hp - value);
             hp = value;
         }
     }

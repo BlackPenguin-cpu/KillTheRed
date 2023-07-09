@@ -6,14 +6,15 @@ public class Wall : BaseEnemy
 {
     private Vector3 originPos;
     private SpriteRenderer spriteRenderer;
+
+    public Sprite[] sprites;
     [SerializeField]
-    private Sprite[] sprites;
+    protected ParticleSystem[] particleSystems;
 
-    [SerializeField]
-    private ParticleSystem[] particleSystems;
+    public EItemList earnItemType;
+    public float cameraPosX;
 
-    float lastHpParts = 1;
-
+    protected CameraManager cameraManager;
     public override float Hp
     {
         get => base.Hp;
@@ -25,7 +26,11 @@ public class Wall : BaseEnemy
     }
     protected override void Die()
     {
+        Player.instance.revivePos = originPos;
+        GameManager.instance.onWall = false;
         SoundManager.instance.PlaySound("SFX_Wall_Die");
+        GameManager.instance.waveNum++;
+        transform.GetChild(0).parent = null;
 
         Player.instance.StartCoroutine(timeDelay());
         IEnumerator timeDelay()
@@ -35,13 +40,17 @@ public class Wall : BaseEnemy
             Time.timeScale = 0.1f;
             yield return new WaitForSecondsRealtime(1f);
             Time.timeScale = 1;
+            cameraManager.cameraState = ECameraState.InGame;
+            yield return new WaitForSecondsRealtime(1f);
+            ItemManager.instance.ItemGet(earnItemType);
         }
         foreach (var ps in particleSystems)
         {
             ps.Play();
         }
+
         gameObject.SetActive(false);
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 3f);
     }
 
     protected override void Hit(float value)
@@ -66,6 +75,7 @@ public class Wall : BaseEnemy
         base.Start();
         originPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        cameraManager = CameraManager.instance;
     }
 
     void WallHpStatus(float value)
@@ -94,5 +104,11 @@ public class Wall : BaseEnemy
     protected override void Update()
     {
         base.Update();
+        if (cameraManager.transform.position.x > cameraPosX)
+        {
+            cameraManager.cameraState = ECameraState.Wall;
+            cameraManager.wallCameraPosX = cameraPosX;
+            GameManager.instance.onWall = true;
+        }
     }
 }

@@ -79,6 +79,8 @@ public partial class Player : Entity
     public EPlayerWeaponState playerWeaponState;
     public EPlayerSkillState playerSkillState;
 
+    public Vector3 revivePos;
+
     private int lookDir;
     [SerializeField]
     private float jumpPower;
@@ -242,7 +244,7 @@ public partial class Player : Entity
         else
             return;
 
-        SoundManager.instance.PlaySound("SFX_Pl_Skill_Flash");
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Flash_mp3cut.net");
 
         float duration = 0.1f;
         staminaValue -= 1;
@@ -294,7 +296,7 @@ public partial class Player : Entity
     }
     private void WeaponChanage(EPlayerWeaponState value)
     {
-        if (weaponState[value] == false && hammerChargingComplete) return;
+        if (weaponState[value] == false || hammerChargingComplete) return;
 
         switch (value)
         {
@@ -302,13 +304,13 @@ public partial class Player : Entity
                 SoundManager.instance.PlaySound("SFX_Pl_Swap_Fist");
                 break;
             case EPlayerWeaponState.Sword:
-                SoundManager.instance.PlaySound("SFX_Pl_Swap_Sowrd");
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Sowrd", SoundType.SE, 0.2f);
                 break;
             case EPlayerWeaponState.Pistol:
-                SoundManager.instance.PlaySound("SFX_Pl_Swap_Pistol");
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Pistol", SoundType.SE, 0.2f);
                 break;
             case EPlayerWeaponState.Hammer:
-                SoundManager.instance.PlaySound("SFX_Pl_Swap_Mammer");
+                SoundManager.instance.PlaySound("SFX_Pl_Swap_Mammer", SoundType.SE, 0.2f, 1.4f);
                 break;
         }
 
@@ -440,7 +442,6 @@ public partial class Player : Entity
             }
         }
     }
-
     private void UpperAttackSound(EPlayerWeaponState weaponState)
     {
         switch (weaponState)
@@ -462,12 +463,13 @@ public partial class Player : Entity
         switch (weaponState)
         {
             case EPlayerWeaponState.Hand:
-                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist");
+                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist", SoundType.SE, 0.4f);
                 break;
             case EPlayerWeaponState.Sword:
-                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attack_Sowrd");
+                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attack_Sowrd", SoundType.SE, 1.2f);
                 break;
             case EPlayerWeaponState.Pistol:
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol", SoundType.SE, 0.4f);
                 break;
             case EPlayerWeaponState.Hammer:
                 break;
@@ -478,13 +480,15 @@ public partial class Player : Entity
         switch (weaponState)
         {
             case EPlayerWeaponState.Hand:
-                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Fist");
+                SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
+                //SoundManager.instance.PlaySound("PunchHit", SoundType.SE, 0.4f);
                 break;
             case EPlayerWeaponState.Sword:
-                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Sowrd");
+                SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
                 break;
             case EPlayerWeaponState.Hammer:
-                SoundManager.instance.PlaySound("SFX_Enermy_Hit_Hammer");
+                SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
+                //SoundManager.instance.PlaySound("SFX_Enermy_Hit_Hammer", SoundType.SE, 0.4f);
                 break;
         }
     }
@@ -499,7 +503,7 @@ public partial class Player : Entity
                 SoundManager.instance.PlaySound("SFX_Pl_Attack_Sowrd");
                 break;
             case EPlayerWeaponState.Pistol:
-                SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol");
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol 1", SoundType.SE, 2f);
                 break;
             case EPlayerWeaponState.Hammer:
                 SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer");
@@ -552,7 +556,7 @@ public partial class Player : Entity
     }
     private void HandAirAttackFinish()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist");
+        SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist", SoundType.SE, 0.4f);
 
         int layerMask = LayerMask.NameToLayer("Platform");
         RaycastHit2D obj = Physics2D.Raycast(transform.position, Vector2.down, 15, 1 << layerMask);
@@ -579,7 +583,7 @@ public partial class Player : Entity
     #region Hammer
     public void HammerChargeComplete()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge", SoundType.SE, 0.25f);
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge", SoundType.SE, 1.25f);
         hammerChargingComplete = true;
     }
     private void HammerAttack()
@@ -613,6 +617,8 @@ public partial class Player : Entity
     }
     private void HammerDownAttack()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer");
+
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hammer][1]);
         foreach (Collider2D obj in objs)
         {
@@ -766,11 +772,18 @@ public partial class Player : Entity
     #endregion
     protected override void Die()
     {
-        Destroy(gameObject);
+        OnDie();
+    }
+    private void OnDie()
+    {
+        Time.timeScale = 0;
+        SoundManager.instance.PlaySound("X2Download.app_-_Undertale_Death_Sound_Effect_128_kbps");
+        UIManager.instance.GameOver();
     }
 
     protected override void Hit(float value)
     {
+        UIManager.instance.HitEffect(0.2f);
         SoundManager.instance.PlaySound("SFX_Pl_Hit");
         Camera.main.DOShakePosition(0.3f, 2);
         invincibleDuration = 1;

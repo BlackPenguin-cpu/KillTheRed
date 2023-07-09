@@ -10,7 +10,6 @@ public class BaseEnemy : Entity
     protected float stunTime;
     public float attackValue;
     protected int lookDir;
-    protected bool invinvincibility;
 
     protected bool isDead;
 
@@ -19,7 +18,6 @@ public class BaseEnemy : Entity
         get => base.Hp;
         set
         {
-            if (invinvincibility) return;
             base.Hp = value;
         }
     }
@@ -57,14 +55,17 @@ public class BaseEnemy : Entity
         hitState = EHitState.Normal;
         rb.gravityScale = 1;
         stunTime = 0;
-
-        invinvincibility = false;
     }
 
     protected override void Die()
     {
         if (hitState == EHitState.KnockDown)
+        {
             Destroy(gameObject, 1);
+            if (!isDead)
+                SoundManager.instance.PlaySound("SFX_Enermy_Died");
+            isDead = true;
+        }
     }
     protected override void Hit(float damage)
     {

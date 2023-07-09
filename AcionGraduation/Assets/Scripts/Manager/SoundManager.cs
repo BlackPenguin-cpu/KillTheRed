@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
 
     Dictionary<string, AudioClip> sounds = new Dictionary<string, AudioClip>();
     Dictionary<SoundType, float> Volumes = new Dictionary<SoundType, float>() { { SoundType.SE, 1 }, { SoundType.BGM, 1 } };
-    Dictionary<SoundType, AudioSource> AudioSources = new Dictionary<SoundType, AudioSource>();
+    public Dictionary<SoundType, AudioSource> AudioSources = new Dictionary<SoundType, AudioSource>();
 
     protected void Awake()
     {
@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
         Bgm.transform.parent = transform;
         Bgm.AddComponent<AudioSource>().loop = true;
         AudioSources[SoundType.BGM] = Bgm.GetComponent<AudioSource>();
+        AudioSources[SoundType.BGM].volume = 0.5f;
 
         AudioClip[] clips = Resources.LoadAll<AudioClip>("Sounds/");
         foreach (AudioClip clip in clips)

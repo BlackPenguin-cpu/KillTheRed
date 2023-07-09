@@ -119,6 +119,5 @@ public class SmallEnemy : BaseEnemy
     protected override void Die()
     {
         base.Die();
-        SoundManager.instance.PlaySound("SFX_Enermy_Died");
     }
 }

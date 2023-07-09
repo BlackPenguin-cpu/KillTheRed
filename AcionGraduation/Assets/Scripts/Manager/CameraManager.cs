@@ -15,6 +15,7 @@ public class CameraManager : MonoBehaviour
     public Image flashScreen;
     public Image fadeScreen;
     public ECameraState cameraState;
+    public float wallCameraPosX;
 
     private Player playerObj;
     private void Awake()
@@ -29,7 +30,11 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         if (cameraState == ECameraState.Tutorial) return;
-        transform.position = Vector3.Lerp(transform.position, new Vector3(playerObj.transform.position.x, 0, -10), Time.deltaTime * speed);
+
+        if (cameraState == ECameraState.Wall)
+            transform.position = Vector3.Lerp(transform.position, new Vector3(wallCameraPosX, 0, -10), Time.deltaTime * speed);
+        else
+            transform.position = Vector3.Lerp(transform.position, new Vector3(playerObj.transform.position.x, 0, -10), Time.deltaTime * speed);
     }
     public void Flash(float duration, float startValue = 0.2f, float endValue = 0f)
     {
@@ -76,10 +81,11 @@ public class CameraManager : MonoBehaviour
         }
         IEnumerator fadeIn()
         {
+            fadeScreen.color = Color.black;
             while (i <= 1)
             {
-                fadeScreen.color = Color.black;
-                color.a = Mathf.Lerp(1, 0, i);
+                fadeScreen.color = color;
+                color.a = 1 - Mathf.Lerp(0, 1, i);
                 i += Time.deltaTime / duration;
                 yield return null;
             }

@@ -11,6 +11,7 @@ public class Granade : MonoBehaviour
     private float duration = 0;
     void Start()
     {
+        SoundManager.instance.PlaySound("X2Download.app-PUBG___GRENADE_OPENING_SOUND___GRENADE_SOUND_EFFECT___GRENADE_PIN_OPENING___NOTIFICATION_mp3cut.net",SoundType.SE,0.5f);
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -26,7 +27,7 @@ public class Granade : MonoBehaviour
     }
     private void Boom()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Pistol_Uppcut");
+        SoundManager.instance.PlaySound("X2Download_mp3cut.net", SoundType.SE, 0.5f);
 
         transform.eulerAngles = Vector3.zero;
         var ray = AttackCollisionCheck(attackCollider);
