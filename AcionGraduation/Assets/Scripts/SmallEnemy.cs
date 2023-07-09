@@ -95,11 +95,11 @@ public class SmallEnemy : BaseEnemy
     private void AttackCheck(int isShake)
     {
         if (gameObject.name.Contains("Big"))
-            SoundManager.instance.PlaySound("SFX_Enermy_Attack_02");
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_02_pig");
         else if (gameObject.name.Contains("Tall"))
-            SoundManager.instance.PlaySound("SFX_Enermy_Attack_03");
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_03_jun");
         else
-            SoundManager.instance.PlaySound("SFX_Enermy_Attack_01");
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_01_Suuu");
         if (AttackCollisionCheck(AttackArea))
         {
             player.Hp -= attackValue;

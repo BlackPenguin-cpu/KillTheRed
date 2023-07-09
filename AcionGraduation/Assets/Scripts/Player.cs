@@ -102,7 +102,6 @@ public partial class Player : Entity
 
     private EPlayerWeaponState nowAttackWeaponState;
 
-    [DictionaryDrawerSettings]
     public Dictionary<EPlayerWeaponState, bool> weaponState;
     public Dictionary<EPlayerSkillState, bool> skillState;
 
@@ -463,6 +462,7 @@ public partial class Player : Entity
         switch (weaponState)
         {
             case EPlayerWeaponState.Hand:
+                SoundManager.instance.PlaySound("SFX_Pl_Critical_Attck_Fist");
                 break;
             case EPlayerWeaponState.Sword:
                 SoundManager.instance.PlaySound("SFX_Pl_Critical_Attack_Sowrd");
@@ -579,7 +579,7 @@ public partial class Player : Entity
     #region Hammer
     public void HammerChargeComplete()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge", SoundType.SE, 0.5f);
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge", SoundType.SE, 0.25f);
         hammerChargingComplete = true;
     }
     private void HammerAttack()
