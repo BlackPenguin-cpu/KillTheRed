@@ -113,7 +113,7 @@ public partial class Player : Entity
         get => base.Hp;
         set
         {
-            if (invincibleDuration > 0) return;
+            if (value - hp < 0 && invincibleDuration > 0) return;
             base.Hp = value;
         }
     }
@@ -204,6 +204,34 @@ public partial class Player : Entity
             WeaponChanage(EPlayerWeaponState.Pistol);
         else if (Input.GetKeyDown(KeyCode.F))
             WeaponChanage(EPlayerWeaponState.Hammer);
+
+
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            maxHp = 100000000000000;
+            hp = 10000000000000;
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            attackDamage = 100;
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            spd++;
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            weaponState[EPlayerWeaponState.Sword] = true;
+            weaponState[EPlayerWeaponState.Pistol] = true;
+            weaponState[EPlayerWeaponState.Hammer] = true;
+            skillState[EPlayerSkillState.Dash] = true;
+            skillState[EPlayerSkillState.Shotgun] = true;
+            skillState[EPlayerSkillState.Spear] = true;
+        }
 
     }
     private void Jump()
@@ -506,7 +534,7 @@ public partial class Player : Entity
                 SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol 1", SoundType.SE, 2f);
                 break;
             case EPlayerWeaponState.Hammer:
-                SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer");
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer",SoundType.SE,0.7f);
                 break;
         }
     }
@@ -617,7 +645,7 @@ public partial class Player : Entity
     }
     private void HammerDownAttack()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer");
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack");
 
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hammer][1]);
         foreach (Collider2D obj in objs)
@@ -682,7 +710,7 @@ public partial class Player : Entity
         if (staminaValue < 1 || playerSkillState == EPlayerSkillState.Shotgun || skillState[EPlayerSkillState.Shotgun] == false) return;
         staminaValue -= 1;
 
-        SoundManager.instance.PlaySound("SFX_Pl_Skill_Shotgun");
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Shotgun", SoundType.SE, 2);
 
         ShadowInst(0.3f, 1);
         state = EPlayerState.Skill;
@@ -730,12 +758,10 @@ public partial class Player : Entity
         state = EPlayerState.Skill;
         playerSkillState = EPlayerSkillState.Spear;
         ShadowInst(0.3f, 1);
-
-        SoundManager.instance.PlaySound("SFX_Pl_Skill_Spear");
     }
     private void SpearAttack()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Skill_Spear_Attack");
+        SoundManager.instance.PlaySound("SFX_Pl_Skill_Spear_Attack", SoundType.SE, 2);
 
         BoxCollider2D collider2D = null;
 

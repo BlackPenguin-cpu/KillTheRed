@@ -95,7 +95,7 @@ public class SmallEnemy : BaseEnemy
     private void AttackCheck(int isShake)
     {
         if (gameObject.name.Contains("Big"))
-            SoundManager.instance.PlaySound("SFX_Enermy_Attack_02_pig");
+            SoundManager.instance.PlaySound("SFX_Enermy_Attack_02_pig", SoundType.SE, 1.5f);
         else if (gameObject.name.Contains("Tall"))
             SoundManager.instance.PlaySound("SFX_Enermy_Attack_03_jun");
         else
@@ -108,7 +108,7 @@ public class SmallEnemy : BaseEnemy
         }
         if (isShake == 1)
         {
-            Camera.main.DOShakePosition(0.2f, 2);
+            Camera.main.DOShakePosition(0.1f, 0.5f);
         }
     }
     protected override void Hit(float damage)

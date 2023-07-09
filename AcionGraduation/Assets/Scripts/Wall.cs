@@ -27,10 +27,16 @@ public class Wall : BaseEnemy
     protected override void Die()
     {
         Player.instance.revivePos = originPos;
+        Player.instance.Hp += 50;
         GameManager.instance.onWall = false;
         SoundManager.instance.PlaySound("SFX_Wall_Die");
         GameManager.instance.waveNum++;
+
         transform.GetChild(0).parent = null;
+        foreach (var ps in particleSystems)
+        {
+            ps.Play();
+        }
 
         Player.instance.StartCoroutine(timeDelay());
         IEnumerator timeDelay()
@@ -44,10 +50,7 @@ public class Wall : BaseEnemy
             yield return new WaitForSecondsRealtime(1f);
             ItemManager.instance.ItemGet(earnItemType);
         }
-        foreach (var ps in particleSystems)
-        {
-            ps.Play();
-        }
+
 
         gameObject.SetActive(false);
         Destroy(gameObject, 3f);
@@ -55,6 +58,7 @@ public class Wall : BaseEnemy
 
     protected override void Hit(float value)
     {
+
         StartCoroutine(Shake());
         SoundManager.instance.PlaySound("SFX_Wall_Attack");
     }
@@ -104,6 +108,10 @@ public class Wall : BaseEnemy
     protected override void Update()
     {
         base.Update();
+        CameraCheck();
+    }
+    protected virtual void CameraCheck()
+    {
         if (cameraManager.transform.position.x > cameraPosX)
         {
             cameraManager.cameraState = ECameraState.Wall;

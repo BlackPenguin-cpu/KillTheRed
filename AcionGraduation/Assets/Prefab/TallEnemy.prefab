@@ -5053,8 +5053,8 @@ MonoBehaviour:
   hitState: 0
   stunValue: 10
   maxStunValue: 10
-  maxHp: 100
-  hp: 100
+  maxHp: 70
+  hp: 70
   stunTime: 0
   attackValue: 8
   speed: 5

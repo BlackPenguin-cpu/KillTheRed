@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
     {
         WeaponIconAnim();
         BaseUIApply();
+        SkillIconApply();
     }
 
     private void BaseUIApply()
@@ -55,16 +56,36 @@ public class UIManager : MonoBehaviour
         }
         lastStaminaInt = (int)player.staminaValue;
     }
+    private void SkillIconApply()
+    {
+        for (int i = 1; i <= (int)EPlayerSkillState.Dash; i++)
+        {
+            if (!player.skillState[(EPlayerSkillState)i])
+            {
+                skillIcon[i - 1].color = Color.clear;
+            }
+            else
+            {
+                skillIcon[i - 1].color = Color.white;
+            }
+
+        }
+    }
     private void WeaponIconAnim()
     {
         for (int i = 0; i < (int)EPlayerWeaponState.End; i++)
         {
             Vector3 pos = weaponIcon[i].rectTransform.anchoredPosition;
+
             if (i == (int)player.playerWeaponState)
             {
                 weaponIcon[i].color = Color.white;
                 weaponIcon[i].rectTransform.anchoredPosition = Vector3.Lerp(pos, new Vector3(pos.x, weaponIconStartPos.y), Time.deltaTime * 10);
 
+            }
+            else if (!player.weaponState[(EPlayerWeaponState)i])
+            {
+                weaponIcon[i].color = Color.clear;
             }
             else
             {
@@ -101,8 +122,9 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator GameOverCoroutine()
     {
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(3);
         gameOverObject.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
         yield return ImageFadeOut(gameOverImage);
 
         SoundManager.instance.PlaySound("X2Download.app-Undertale_Game_Over_Theme_mp3cut.net", SoundType.BGM);
@@ -116,9 +138,11 @@ public class UIManager : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(1);
         Player.instance.transform.position = Player.instance.revivePos;
-        Player.instance.Hp = Player.instance.maxHp;
-        Time.timeScale = 1;
+        Player.instance.Hp = 100;
+        CameraManager.instance.transform.position = Player.instance.revivePos;
+        CameraManager.instance.cameraState = ECameraState.InGame;
         yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = 1;
 
 
         gameOverObject.gameObject.SetActive(false);
@@ -133,7 +157,6 @@ public class UIManager : MonoBehaviour
             wall.GetComponent<SpriteRenderer>().sprite = wall.sprites[4];
             wall.Hp = wall.maxHp;
         }
-        CameraManager.instance.cameraState = ECameraState.InGame;
         SoundManager.instance.PlaySound("BGM_03_Ingame", SoundType.BGM);
 
 

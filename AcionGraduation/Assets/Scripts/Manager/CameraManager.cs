@@ -55,7 +55,26 @@ public class CameraManager : MonoBehaviour
             color.a = 0;
             flashScreen.color = color;
         }
+    }
+    public void FlashBang(float duration, float startValue = 0f, float endValue = 1f)
+    {
+        float i = startValue;
+        Color color = new Color(1, 1, 1, startValue);
 
+        StartCoroutine(fade());
+        IEnumerator fade()
+        {
+
+            while (i <= 1)
+            {
+                flashScreen.color = color;
+                color.a = Mathf.Lerp(0, endValue, i);
+                i += Time.deltaTime / duration;
+                yield return null;
+            }
+            color.a = 1;
+            flashScreen.color = color;
+        }
     }
     public void Fade(float duration, bool isFadeOut)
     {

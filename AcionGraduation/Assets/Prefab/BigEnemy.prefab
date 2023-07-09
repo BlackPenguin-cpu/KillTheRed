@@ -182,8 +182,8 @@ MonoBehaviour:
   hitState: 0
   stunValue: 20
   maxStunValue: 20
-  maxHp: 150
-  hp: 150
+  maxHp: 100
+  hp: 100
   stunTime: 0
   attackValue: 12
   speed: 3
