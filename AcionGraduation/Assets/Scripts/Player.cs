@@ -514,6 +514,9 @@ public partial class Player : Entity
             case EPlayerWeaponState.Sword:
                 SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
                 break;
+            case EPlayerWeaponState.Pistol:
+                SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
+                break;
             case EPlayerWeaponState.Hammer:
                 SoundManager.instance.PlaySound("SwordHit", SoundType.SE, 0.4f);
                 //SoundManager.instance.PlaySound("SFX_Enermy_Hit_Hammer", SoundType.SE, 0.4f);
@@ -534,7 +537,7 @@ public partial class Player : Entity
                 SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol 1", SoundType.SE, 2f);
                 break;
             case EPlayerWeaponState.Hammer:
-                SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer",SoundType.SE,0.7f);
+                SoundManager.instance.PlaySound("SFX_Pl_Attack_Hammer", SoundType.SE, 0.7f);
                 break;
         }
     }
@@ -645,7 +648,7 @@ public partial class Player : Entity
     }
     private void HammerDownAttack()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack");
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack",SoundType.SE,2);
 
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hammer][1]);
         foreach (Collider2D obj in objs)
@@ -662,6 +665,7 @@ public partial class Player : Entity
     #region Gun
     private void GunLastShot()
     {
+        SoundManager.instance.PlaySound("SFX_Pl_Attack_Pistol");
         Vector2 pos = gunSpark.transform.localPosition;
         gunSpark.transform.localPosition = new Vector2(System.MathF.Abs(pos.x) * lookDir, pos.y);
 
