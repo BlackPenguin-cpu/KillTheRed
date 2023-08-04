@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BossWall : Wall
 {
-    int phase = 0;
-
+    public int phase = 0;
     protected override void Hit(float value)
     {
 
@@ -38,8 +37,9 @@ public class BossWall : Wall
     }
     protected override void Die()
     {
+        if (isDead == true) return;
         SoundManager.instance.PlaySound("054_mp3cut.net_1", SoundType.SE, 2);
-        transform.DOShakePosition(5, 3, 20).SetEase(Ease.OutQuad);
+        transform.DOShakePosition(5, 4, 20).SetEase(Ease.InExpo);
         CameraManager.instance.FlashBang(5);
 
         StartCoroutine(timeDelay());

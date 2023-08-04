@@ -1275,6 +1275,7 @@ MonoBehaviour:
   - {fileID: 1597148848}
   earnItemType: 0
   cameraPosX: 550
+  phase: 0
 --- !u!1 &259273574
 GameObject:
   m_ObjectHideFlags: 0

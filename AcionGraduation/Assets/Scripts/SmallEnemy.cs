@@ -69,7 +69,7 @@ public class SmallEnemy : BaseEnemy
                 yield return null;
                 continue;
             }
-            state = Mathf.Abs(player.transform.position.x - transform.position.x) > (AttackArea.size.x / 2 + AttackArea.offset.x) ? EEnemyState.Trace : EEnemyState.Attack;
+            state = Mathf.Abs(player.transform.position.x - transform.position.x) > (AttackArea.size.x / 2.15f + AttackArea.offset.x) ? EEnemyState.Trace : EEnemyState.Attack;
 
             if (state == EEnemyState.Attack)
             {

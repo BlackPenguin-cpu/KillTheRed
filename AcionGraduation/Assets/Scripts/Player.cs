@@ -90,6 +90,7 @@ public partial class Player : Entity
 
     private bool hammerCharging;
     private bool hammerChargingComplete;
+    private bool hammerSwapBan;
 
     private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
@@ -140,7 +141,7 @@ public partial class Player : Entity
             playerSkillState = EPlayerSkillState.NONE;
 
         if (staminaValue <= staminaMaxValue)
-            staminaValue += Time.deltaTime * staminaRegenSec;
+            staminaValue += Time.deltaTime * (onAir ? 0.2f : staminaRegenSec);
         dashCooldown -= Time.deltaTime;
         invincibleDuration -= Time.deltaTime;
         spriteRenderer.color = invincibleDuration > 0 ? new Color(1, 1, 1, 0.5f) : Color.white;
@@ -205,11 +206,8 @@ public partial class Player : Entity
         else if (Input.GetKeyDown(KeyCode.F))
             WeaponChanage(EPlayerWeaponState.Hammer);
 
-
-
-
-
-
+        /*
+        //#DEBUG
         if (Input.GetKeyDown(KeyCode.F1))
         {
             maxHp = 100000000000000;
@@ -232,7 +230,7 @@ public partial class Player : Entity
             skillState[EPlayerSkillState.Shotgun] = true;
             skillState[EPlayerSkillState.Spear] = true;
         }
-
+        */
     }
     private void Jump()
     {
@@ -324,7 +322,8 @@ public partial class Player : Entity
     }
     private void WeaponChanage(EPlayerWeaponState value)
     {
-        if (weaponState[value] == false || hammerChargingComplete) return;
+        if (weaponState[value] == false || hammerSwapBan || hammerChargingComplete) return;
+
 
         switch (value)
         {
@@ -637,9 +636,12 @@ public partial class Player : Entity
                 StartCoroutine(timeDelay());
                 IEnumerator timeDelay()
                 {
+                    hammerSwapBan = true;
                     Time.timeScale = 0.1f;
                     yield return new WaitForSecondsRealtime(0.2f);
                     Time.timeScale = 1;
+                    yield return new WaitForSecondsRealtime(0.1f);
+                    hammerSwapBan = false;
                 }
             }
         }
@@ -648,7 +650,7 @@ public partial class Player : Entity
     }
     private void HammerDownAttack()
     {
-        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack",SoundType.SE,2);
+        SoundManager.instance.PlaySound("SFX_Pl_Hammer_charge_Attack", SoundType.SE, 2);
 
         var objs = AttackCollisionCheck(weaponAttackAreaClass.weaponOnAirAttackArea[EPlayerWeaponState.Hammer][1]);
         foreach (Collider2D obj in objs)

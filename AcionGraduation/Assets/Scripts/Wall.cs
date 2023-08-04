@@ -108,6 +108,9 @@ public class Wall : BaseEnemy
     protected override void Update()
     {
         base.Update();
+    }
+    protected void FixedUpdate()
+    {
         CameraCheck();
     }
     protected virtual void CameraCheck()

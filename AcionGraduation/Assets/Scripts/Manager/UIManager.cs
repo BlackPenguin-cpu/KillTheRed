@@ -141,6 +141,7 @@ public class UIManager : MonoBehaviour
         Player.instance.Hp = 100;
         CameraManager.instance.transform.position = Player.instance.revivePos;
         CameraManager.instance.cameraState = ECameraState.InGame;
+        GameManager.instance.onWall = false;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
 
@@ -157,6 +158,7 @@ public class UIManager : MonoBehaviour
             wall.GetComponent<SpriteRenderer>().sprite = wall.sprites[4];
             wall.Hp = wall.maxHp;
         }
+        FindObjectOfType<BossWall>().phase = 0;
         SoundManager.instance.PlaySound("BGM_03_Ingame", SoundType.BGM);
 
 
